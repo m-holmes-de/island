@@ -1,5 +1,5 @@
 -- Window rules
--- https://wiki.hypr.land/Configuring/Window-Rules/
+-- https://wiki.hyprland.org/Configuring/Window-Rules/
 
 -- Float common dialogs
 island.window("pavucontrol", { float = true })

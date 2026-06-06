@@ -33,6 +33,15 @@ It uses a migration-based install system inspired by Omarchy (basecamp/omarchy).
 - Use `[[ ]]` for string/file tests, `(( ))` for numeric
 - Quote variables in double quotes
 
+## Hyprland reference
+- Always consult the Hyprland wiki for configuration: https://wiki.hyprland.org/
+- Lua API reference: https://wiki.hyprland.org/Configuring/Lua-API/
+- Variables/options: https://wiki.hyprland.org/Configuring/Variables/
+- Keybindings: https://wiki.hyprland.org/Configuring/Binds/
+- Window rules: https://wiki.hyprland.org/Configuring/Window-Rules/
+- Monitors: https://wiki.hyprland.org/Configuring/Monitors/
+- Animations: https://wiki.hyprland.org/Configuring/Animations/
+
 ## Architecture decisions
 - Hyprland configs use Lua (hyprland's native Lua scripting support)
 - Modular hyprland config: main file requires bindings, appearance, etc.

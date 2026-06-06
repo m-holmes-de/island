@@ -1,22 +1,19 @@
 -- Input configuration
--- https://wiki.hypr.land/Configuring/Basics/Variables/#input
+-- https://wiki.hyprland.org/Configuring/Variables/#input
 
 hl.config({
   input = {
-    kb_layout = "us",
+    kb_layout = "de",
+    kb_variant = "",
+    kb_model = "",
+    kb_options = "",
+    kb_rules = "",
     follow_mouse = 1,
     sensitivity = 0,
 
     touchpad = {
       natural_scroll = true,
-      tap_to_click = true,
-      drag_lock = true,
     },
-  },
-
-  gestures = {
-    workspace_swipe = true,
-    workspace_swipe_fingers = 3,
   },
 
   misc = {

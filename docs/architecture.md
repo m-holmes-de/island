@@ -5,6 +5,16 @@
 Island is a Hyprland desktop environment for CachyOS. It uses a migration-based
 install system inspired by [Omarchy](https://github.com/basecamp/omarchy).
 
+## References
+
+- [Hyprland Wiki](https://wiki.hyprland.org/) — official documentation for all Hyprland configuration
+- [Hyprland Variables](https://wiki.hyprland.org/Configuring/Variables/) — all config options
+- [Hyprland Binds](https://wiki.hyprland.org/Configuring/Binds/) — keybinding reference
+- [Hyprland Monitors](https://wiki.hyprland.org/Configuring/Monitors/) — monitor configuration
+- [Hyprland Window Rules](https://wiki.hyprland.org/Configuring/Window-Rules/) — window rules
+- [Hyprland Animations](https://wiki.hyprland.org/Configuring/Animations/) — animation configuration
+- [Hyprland Lua API](https://wiki.hyprland.org/Configuring/Lua-API/) — Lua scripting reference
+
 ## Install Flow
 
 ```

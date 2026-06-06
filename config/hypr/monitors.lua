@@ -1,5 +1,5 @@
 -- Monitor configuration
--- https://wiki.hypr.land/Configuring/Monitors/
+-- https://wiki.hyprland.org/Configuring/Monitors/
 -- Customize this file for your setup.
 
-hl.monitor(",", { resolution = "preferred", position = "auto", scale = 1 })
+hl.monitor({ output = "", mode = "preferred", position = "auto", scale = "auto" })

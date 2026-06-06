@@ -1,4 +1,5 @@
 -- Island Keybindings
+-- https://wiki.hyprland.org/Configuring/Binds/
 -- SUPER = Windows/Meta key
 
 -- === Application Launchers ===
@@ -26,7 +27,6 @@ island.bind("SUPER + J", "Toggle split", hl.dsp.layout("togglesplit"))
 island.bind("SUPER + H", "Focus left", hl.dsp.focus({ direction = "l" }))
 island.bind("SUPER + L", "Focus right", hl.dsp.focus({ direction = "r" }))
 island.bind("SUPER + K", "Focus up", hl.dsp.focus({ direction = "u" }))
--- SUPER+J is togglesplit, use arrow for down focus
 island.bind("SUPER + LEFT", "Focus left", hl.dsp.focus({ direction = "l" }))
 island.bind("SUPER + RIGHT", "Focus right", hl.dsp.focus({ direction = "r" }))
 island.bind("SUPER + UP", "Focus up", hl.dsp.focus({ direction = "u" }))
@@ -77,21 +77,21 @@ island.bind("ALT + SHIFT + TAB", "Previous window", hl.dsp.window.cycle_next({ n
 island.bind("ALT + SHIFT + TAB", "Bring to top", hl.dsp.window.bring_to_top())
 
 -- === Screenshots ===
-island.bind(", Print", "Screenshot (region)", 'grim -g "$(slurp -d)" - | satty --filename -')
-island.bind("SHIFT, Print", "Screenshot (full)", "grim - | satty --filename -")
-island.bind("SUPER, Print", "Screenshot to clipboard", 'grim -g "$(slurp -d)" - | wl-copy')
+island.bind("Print", "Screenshot (region)", 'grim -g "$(slurp -d)" - | satty --filename -')
+island.bind("SHIFT + Print", "Screenshot (full)", "grim - | satty --filename -")
+island.bind("SUPER + Print", "Screenshot to clipboard", 'grim -g "$(slurp -d)" - | wl-copy')
 
 -- === Media Keys ===
-island.bind(", XF86AudioRaiseVolume", nil, "pamixer -i 5", { repeatable = true })
-island.bind(", XF86AudioLowerVolume", nil, "pamixer -d 5", { repeatable = true })
-island.bind(", XF86AudioMute", nil, "pamixer -t")
-island.bind(", XF86AudioMicMute", nil, "pamixer --default-source -t")
-island.bind(", XF86MonBrightnessUp", nil, "brightnessctl set +5%", { repeatable = true })
-island.bind(", XF86MonBrightnessDown", nil, "brightnessctl set 5%-", { repeatable = true })
-island.bind(", XF86AudioPlay", nil, "playerctl play-pause")
-island.bind(", XF86AudioNext", nil, "playerctl next")
-island.bind(", XF86AudioPrev", nil, "playerctl previous")
+island.bind("XF86AudioRaiseVolume", nil, "pamixer -i 5", { locked = true, repeating = true })
+island.bind("XF86AudioLowerVolume", nil, "pamixer -d 5", { locked = true, repeating = true })
+island.bind("XF86AudioMute", nil, "pamixer -t", { locked = true })
+island.bind("XF86AudioMicMute", nil, "pamixer --default-source -t", { locked = true })
+island.bind("XF86MonBrightnessUp", nil, "brightnessctl set +5%", { locked = true, repeating = true })
+island.bind("XF86MonBrightnessDown", nil, "brightnessctl set 5%-", { locked = true, repeating = true })
+island.bind("XF86AudioPlay", nil, "playerctl play-pause", { locked = true })
+island.bind("XF86AudioNext", nil, "playerctl next", { locked = true })
+island.bind("XF86AudioPrev", nil, "playerctl previous", { locked = true })
 
 -- === System ===
 island.bind("SUPER + ESCAPE", "Lock screen", "hyprlock")
-island.bind("SUPER + SHIFT + Q", "Exit Hyprland", hl.dsp.exit())
+island.bind("SUPER + SHIFT + Q", "Exit Hyprland", hl.dsp.exec_cmd("hyprctl dispatch exit"))

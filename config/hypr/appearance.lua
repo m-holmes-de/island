@@ -1,5 +1,5 @@
 -- Island Appearance — Rose Pine (main/dark)
--- https://wiki.hypr.land/Configuring/Basics/Variables/
+-- https://wiki.hyprland.org/Configuring/Variables/
 
 -- Rose Pine palette
 local colors = {
@@ -46,7 +46,9 @@ hl.config({
       enabled = true,
       size = 6,
       passes = 2,
-      new_optimizations = true,
+      special = true,
+      brightness = 0.60,
+      contrast = 0.75,
     },
 
     shadow = {
@@ -62,13 +64,11 @@ hl.config({
   },
 
   dwindle = {
-    pseudotile = true,
     preserve_split = true,
     force_split = 2,
   },
 
   misc = {
-    force_default_wallpaper = 0,
     disable_hyprland_logo = true,
     disable_splash_rendering = true,
     focus_on_activate = true,
@@ -77,17 +77,31 @@ hl.config({
   cursor = {
     hide_on_key_press = true,
   },
+
+  ecosystem = {
+    no_update_news = true,
+  },
 })
 
 -- Animations
-hl.curve("easeOut", { type = "bezier", points = { { 0.16, 1 }, { 0.3, 1 } } })
+-- https://wiki.hyprland.org/Configuring/Animations/
+hl.curve("easeOutQuint", { type = "bezier", points = { { 0.23, 1 }, { 0.32, 1 } } })
 hl.curve("easeInOut", { type = "bezier", points = { { 0.45, 0 }, { 0.55, 1 } } })
 hl.curve("linear", { type = "bezier", points = { { 0, 0 }, { 1, 1 } } })
+hl.curve("almostLinear", { type = "bezier", points = { { 0.5, 0.5 }, { 0.75, 1.0 } } })
 hl.curve("quick", { type = "bezier", points = { { 0.15, 0 }, { 0.1, 1 } } })
 
 hl.animation({ leaf = "global", enabled = true, speed = 10, bezier = "default" })
-hl.animation({ leaf = "windows", enabled = true, speed = 4, bezier = "easeOut", style = "popin 80%" })
-hl.animation({ leaf = "windowsOut", enabled = true, speed = 1.5, bezier = "linear", style = "popin 80%" })
-hl.animation({ leaf = "border", enabled = true, speed = 8, bezier = "default" })
-hl.animation({ leaf = "fade", enabled = true, speed = 4, bezier = "default" })
+hl.animation({ leaf = "border", enabled = true, speed = 5.39, bezier = "easeOutQuint" })
+hl.animation({ leaf = "windows", enabled = true, speed = 3.79, bezier = "easeOutQuint" })
+hl.animation({ leaf = "windowsIn", enabled = true, speed = 4.1, bezier = "easeOutQuint", style = "popin 87%" })
+hl.animation({ leaf = "windowsOut", enabled = true, speed = 1.49, bezier = "linear", style = "popin 87%" })
+hl.animation({ leaf = "fadeIn", enabled = true, speed = 1.73, bezier = "almostLinear" })
+hl.animation({ leaf = "fadeOut", enabled = true, speed = 1.46, bezier = "almostLinear" })
+hl.animation({ leaf = "fade", enabled = true, speed = 3.03, bezier = "quick" })
+hl.animation({ leaf = "layers", enabled = true, speed = 3.81, bezier = "easeOutQuint" })
+hl.animation({ leaf = "layersIn", enabled = true, speed = 4, bezier = "easeOutQuint", style = "fade" })
+hl.animation({ leaf = "layersOut", enabled = true, speed = 1.5, bezier = "linear", style = "fade" })
+hl.animation({ leaf = "fadeLayersIn", enabled = true, speed = 1.79, bezier = "almostLinear" })
+hl.animation({ leaf = "fadeLayersOut", enabled = true, speed = 1.39, bezier = "almostLinear" })
 hl.animation({ leaf = "workspaces", enabled = true, speed = 4, bezier = "easeInOut", style = "slide" })

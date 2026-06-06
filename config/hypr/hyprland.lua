@@ -1,5 +1,5 @@
 -- Island Hyprland Configuration
--- https://wiki.hypr.land/Configuring/Start/
+-- https://wiki.hyprland.org/Configuring/Start/
 
 -- Set up module path for island configs
 package.path = os.getenv("HOME") .. "/.config/?.lua;" .. package.path
