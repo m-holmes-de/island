@@ -34,13 +34,39 @@ All commands start with `island-`. Prefixes indicate purpose:
 - Blank lines are ignored
 - Parsed with: `grep -v '^#' file.packages | grep -v '^$'`
 
-# Migrations
+# Migrations — MANDATORY for config changes
 
+**Every change to deployed user configs MUST be done via a migration.**
+
+`config/` is only for new installs (copied once with `cp -n`). Once configs are
+deployed to `~/.config/`, the ONLY way to update them is a migration. This
+protects user customizations.
+
+When changing a config:
+1. Update the default in `config/` (for new installs)
+2. Create a migration in `migrations/` (for existing installs)
+3. The migration must be idempotent (check before modifying)
+
+Migration rules:
 - Filename: `<unix-timestamp>_description.sh`
 - No shebang (run via `bash "$file"`)
 - Start with `echo` describing what the migration does
 - Use `island-pkg-add`, `island-pkg-missing` etc. where possible
 - State tracked in `~/.local/state/island/migrations/`
+- Must be idempotent: use `grep -q` before `sed`, check file contents before replacing
+
+Example — replacing a whole config file:
+```bash
+echo "Fix Hyprland monitor config to use table format"
+ISLAND_PATH="${ISLAND_PATH:-$HOME/.local/share/island}"
+cp "$ISLAND_PATH/config/hypr/monitors.lua" ~/.config/hypr/monitors.lua
+```
+
+Example — patching a line in a config:
+```bash
+echo "Switch keyboard layout to de"
+sed -i 's/kb_layout = "us"/kb_layout = "de"/' ~/.config/hypr/input.lua
+```
 
 # Install Scripts
 

@@ -42,6 +42,15 @@ It uses a migration-based install system inspired by Omarchy (basecamp/omarchy).
 - Monitors: https://wiki.hyprland.org/Configuring/Monitors/
 - Animations: https://wiki.hyprland.org/Configuring/Animations/
 
+## CRITICAL: Migration-first rule
+Any change to deployed configs (`~/.config/`) MUST go through a migration.
+- `config/` holds defaults for NEW installs only (deployed via `cp -n`, never overwrites)
+- To update configs on existing installs, create a migration in `migrations/`
+- The migration patches `~/.config/` files directly (the user's live copies)
+- Update `config/` defaults AND create a migration — both are required
+- Migrations must be idempotent (safe to run if the change is already applied)
+- Never force-copy from `config/` to `~/.config/` — that destroys user customizations
+
 ## Architecture decisions
 - Hyprland configs use Lua (hyprland's native Lua scripting support)
 - Modular hyprland config: main file requires bindings, appearance, etc.

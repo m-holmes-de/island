@@ -53,6 +53,9 @@ Configs are deployed with `cp -n` (no-clobber). This means:
 - Re-runs: existing user modifications are never overwritten
 - To reset a config to default, delete it and re-run `./install.sh`
 
+**CRITICAL: After initial deployment, ALL config changes go through migrations.**
+The `config/` directory is only for new installs. Never force-copy over `~/.config/`.
+
 ## Migration System
 
 Migrations handle system evolution over time (new packages, config changes, etc.).
@@ -61,6 +64,23 @@ Migrations handle system evolution over time (new packages, config changes, etc.
 - Tracked via empty state files in `~/.local/state/island/migrations/`
 - Only pending migrations run; completed ones are skipped
 - Failed migrations can be skipped and retried later
+
+### When to create a migration
+
+| Change | What to do |
+|--------|-----------|
+| Fix a bug in a config file | Update `config/` default + create migration to patch `~/.config/` |
+| Add a new package | Create migration with `island-pkg-add` |
+| Add a new keybinding | Update `config/hypr/bindings.lua` + migration to patch `~/.config/hypr/bindings.lua` |
+| Change a default setting | Update `config/` + migration to apply to existing installs |
+| Add a new config file for a new tool | Add to `config/` (will be deployed on next install) + migration to copy it |
+
+### Migration idempotency
+
+Every migration must be safe to run even if the change is already applied:
+- Check before modifying: `grep -q "pattern" file` before `sed`
+- Use `cp` only when replacing entire files intentionally
+- Use `island-pkg-add` which skips installed packages
 
 ## Idempotency
 
