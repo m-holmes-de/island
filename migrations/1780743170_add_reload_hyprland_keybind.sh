@@ -12,5 +12,5 @@ if grep -q 'hyprctl reload' "$BINDINGS" 2>/dev/null; then
   exit 0
 fi
 
-echo 'island.bind("SUPER + SHIFT + C", "Reload Hyprland config", hl.dsp.exec_cmd("hyprctl reload"))' >> "$BINDINGS"
+echo 'island.bind("SUPER + SHIFT + W", "Reload Hyprland config", hl.dsp.exec_cmd("hyprctl reload"))' >> "$BINDINGS"
 echo "  Added SUPER+SHIFT+C to reload Hyprland."
