@@ -9,11 +9,8 @@ Using `cliphist` with rofi (SUPER+V).
 Screenshots via `island-capture-screenshot` (grim + slurp + satty).
 Recording via `island-capture-recording` (wf-recorder) with waybar indicator.
 
-### Keybinding Viewer
-- On-screen keybinding cheat sheet / help overlay
-- Consider [nwg-wrapper](https://github.com/nwg-piotr/nwg-wrapper) for overlay display
-- Or a rofi-based keybinding browser (parse bindings.lua → rofi list)
-- Keybind: something like SUPER+? or SUPER+F1
+### ~~Keybinding Viewer~~ — Done
+Rofi-based viewer parsing bindings.lua. SUPER+/ to open.
 
 ### Theme Management
 - Switchable color schemes (Rose Pine, Catppuccin, Tokyo Night, etc.)

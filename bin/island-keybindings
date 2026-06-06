@@ -1,0 +1,38 @@
+#!/bin/bash
+# island:summary=Show all keybindings in rofi.
+
+set -eEo pipefail
+
+BINDINGS_FILE="$HOME/.config/hypr/bindings.lua"
+
+if [[ ! -f "$BINDINGS_FILE" ]]; then
+  notify-send -u normal "Keybindings" "bindings.lua not found"
+  exit 1
+fi
+
+# Parse island.bind("KEYS", "Description", ...) lines
+# Skip entries with nil description (media keys etc.)
+# Also parse section comments (-- === Section ===)
+{
+  section=""
+  while IFS= read -r line; do
+    # Detect section headers
+    if [[ "$line" =~ ^--\ ===\ (.+)\ ===$ ]]; then
+      section="${BASH_REMATCH[1]}"
+      continue
+    fi
+
+    # Parse island.bind lines with a description (not nil)
+    if [[ "$line" =~ island\.bind\(\"([^\"]+)\",\ \"([^\"]+)\" ]]; then
+      keys="${BASH_REMATCH[1]}"
+      desc="${BASH_REMATCH[2]}"
+      # Format: pad keys to fixed width for alignment
+      printf "%-28s  %s\n" "$keys" "$desc"
+    fi
+  done < "$BINDINGS_FILE"
+} | rofi -dmenu -p "Keybindings" -i \
+    -theme-str 'listview { lines: 20; }' \
+    -theme-str 'window { width: 700px; }' \
+    -theme-str 'element { font: "JetBrains Mono Nerd Font 12"; }' \
+    -theme-str 'inputbar { enabled: false; }' \
+    || true
