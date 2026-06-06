@@ -12,6 +12,9 @@ hl.env("PATH", island_path .. "/bin:" .. (os.getenv("PATH") or ""))
 hl.env("XCURSOR_SIZE", "24")
 hl.env("HYPRCURSOR_SIZE", "24")
 
+-- XDG (ensure ~/.local/share is included for desktop file overrides)
+hl.env("XDG_DATA_DIRS", home .. "/.local/share:/usr/local/share:/usr/share")
+
 -- Wayland
 hl.env("GDK_BACKEND", "wayland,x11,*")
 hl.env("QT_QPA_PLATFORM", "wayland;xcb")
