@@ -1,0 +1,10 @@
+#!/bin/bash
+# island:summary=Returns 0 (true) if any named package is missing from the system.
+# island:args=<packages...>
+
+for pkg in "$@"; do
+  if ! pacman -Q "$pkg" &>/dev/null; then
+    exit 0
+  fi
+done
+exit 1

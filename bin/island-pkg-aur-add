@@ -1,0 +1,19 @@
+#!/bin/bash
+# island:summary=Install AUR packages via yay if missing (idempotent).
+# island:args=<packages...>
+
+set -eEo pipefail
+
+missing=()
+for pkg in "$@"; do
+  if ! pacman -Q "$pkg" &>/dev/null; then
+    missing+=("$pkg")
+  fi
+done
+
+if (( ${#missing[@]} == 0 )); then
+  exit 0
+fi
+
+echo "Installing (AUR): ${missing[*]}"
+yay -S --noconfirm --needed "${missing[@]}"

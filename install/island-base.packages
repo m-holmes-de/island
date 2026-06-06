@@ -1,0 +1,67 @@
+# Island base packages
+
+# Window Manager & Core
+hyprland
+hyprlock
+hypridle
+hyprpaper
+xdg-desktop-portal-hyprland
+xdg-desktop-portal-gtk
+
+# Bar, Launcher, Notifications
+waybar
+rofi
+mako
+
+# Terminal & Browser
+ghostty
+firefox
+
+# File Manager
+thunar
+gvfs
+
+# Screenshots & Clipboard
+grim
+slurp
+satty
+wl-clipboard
+cliphist
+
+# Audio
+pipewire
+pipewire-pulse
+wireplumber
+pulsemixer
+playerctl
+pamixer
+
+# Bluetooth & Network (TUI-first)
+bluez
+bluez-utils
+bluetui
+networkmanager
+impala
+
+# Brightness
+brightnessctl
+
+# Fonts
+ttf-jetbrains-mono-nerd
+noto-fonts
+noto-fonts-emoji
+
+# Wayland compat
+qt5-wayland
+qt6-wayland
+
+# TUI tools
+btop
+
+# Utilities
+jq
+ripgrep
+fd
+fzf
+polkit-gnome
+unzip

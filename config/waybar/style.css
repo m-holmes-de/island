@@ -1,0 +1,86 @@
+/* Island Waybar — Rose Pine */
+
+* {
+    font-family: "JetBrains Mono Nerd Font", monospace;
+    font-size: 13px;
+    min-height: 0;
+}
+
+window#waybar {
+    background: rgba(25, 23, 36, 0.85);
+    color: #e0def4;
+    border-bottom: 2px solid rgba(49, 116, 143, 0.3);
+}
+
+#workspaces button {
+    padding: 0 8px;
+    color: #6e6a86;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+}
+
+#workspaces button.active {
+    color: #31748f;
+}
+
+#workspaces button:hover {
+    background: rgba(49, 116, 143, 0.15);
+    color: #e0def4;
+}
+
+#clock,
+#pulseaudio,
+#network,
+#bluetooth,
+#battery,
+#tray,
+#custom-power {
+    padding: 0 12px;
+    margin: 4px 0;
+    border-radius: 6px;
+}
+
+#clock {
+    color: #e0def4;
+    font-weight: bold;
+}
+
+#pulseaudio {
+    color: #f6c177;
+}
+
+#network {
+    color: #9ccfd8;
+}
+
+#bluetooth {
+    color: #c4a7e7;
+}
+
+#battery {
+    color: #31748f;
+}
+
+#battery.warning {
+    color: #f6c177;
+}
+
+#battery.critical {
+    color: #eb6f92;
+}
+
+#custom-power {
+    color: #eb6f92;
+    padding: 0 14px 0 8px;
+}
+
+#tray {
+    color: #e0def4;
+}
+
+tooltip {
+    background: #1f1d2e;
+    border: 1px solid #26233a;
+    border-radius: 8px;
+}

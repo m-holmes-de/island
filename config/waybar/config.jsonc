@@ -1,0 +1,90 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 36,
+    "spacing": 8,
+
+    "modules-left": [
+        "hyprland/workspaces",
+        "hyprland/window"
+    ],
+    "modules-center": [
+        "clock"
+    ],
+    "modules-right": [
+        "tray",
+        "pulseaudio",
+        "network",
+        "bluetooth",
+        "battery",
+        "custom/power"
+    ],
+
+    "hyprland/workspaces": {
+        "format": "{icon}",
+        "format-icons": {
+            "active": "\u25cf",
+            "default": "\u25cb",
+            "empty": "\u25cb"
+        },
+        "on-click": "activate",
+        "sort-by-number": true
+    },
+
+    "hyprland/window": {
+        "max-length": 50
+    },
+
+    "clock": {
+        "format": "{:%H:%M}",
+        "format-alt": "{:%A, %B %d, %Y  %H:%M}",
+        "tooltip-format": "<tt><small>{calendar}</small></tt>"
+    },
+
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "format-muted": "\ud83d\udd07 muted",
+        "format-icons": {
+            "default": ["\ud83d\udd08", "\ud83d\udd09", "\ud83d\udd0a"]
+        },
+        "on-click": "ghostty -e pulsemixer"
+    },
+
+    "network": {
+        "format-wifi": "\u25c9 {signalStrength}%",
+        "format-ethernet": "\u25c8",
+        "format-disconnected": "\u25cb",
+        "tooltip-format-wifi": "{essid} ({signalStrength}%)",
+        "tooltip-format-ethernet": "{ifname}: {ipaddr}",
+        "on-click": "ghostty -e impala"
+    },
+
+    "bluetooth": {
+        "format": "\u25cf",
+        "format-disabled": "\u25cb",
+        "format-connected": "\u25cf {num_connections}",
+        "tooltip-format": "{controller_alias}\n{num_connections} connected",
+        "on-click": "ghostty -e bluetui"
+    },
+
+    "battery": {
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{icon} {capacity}%",
+        "format-charging": "\u26a1 {capacity}%",
+        "format-plugged": "\u26a1 {capacity}%",
+        "format-icons": ["\u2581", "\u2582", "\u2583", "\u2584", "\u2585", "\u2586", "\u2587", "\u2588"]
+    },
+
+    "tray": {
+        "spacing": 8
+    },
+
+    "custom/power": {
+        "format": "\u23fb",
+        "on-click": "hyprlock",
+        "tooltip": false
+    }
+}
