@@ -104,6 +104,6 @@ A red 󰻂 icon appears in waybar while recording.
 
 | Key | Action |
 |-----|--------|
-| SUPER + / | Show keybinding viewer |
+| SUPER + SHIFT + K | Show keybinding viewer |
 | SUPER + Escape | Lock screen |
 | SUPER + SHIFT + Q | Exit Hyprland |

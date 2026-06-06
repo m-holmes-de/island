@@ -10,7 +10,7 @@ island.bind("SUPER + E", "File manager", "thunar")
 island.bind("SUPER + V", "Clipboard history", "cliphist list | rofi -dmenu | cliphist decode | wl-copy")
 
 island.bind("SUPER + W", "Wallpaper selector", "island-wallpaper-select")
-island.bind("SUPER + SLASH", "Keybindings", "island-keybindings")
+island.bind("SUPER + SHIFT + K", "Keybindings", "island-keybindings")
 
 -- === TUI Launchers ===
 island.bind("SUPER + N", "Network (impala)", island.tui("impala"))
