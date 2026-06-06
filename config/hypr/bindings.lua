@@ -95,3 +95,4 @@ island.bind("XF86AudioPrev", nil, "playerctl previous", { locked = true })
 -- === System ===
 island.bind("SUPER + ESCAPE", "Lock screen", "hyprlock")
 island.bind("SUPER + SHIFT + Q", "Exit Hyprland", hl.dsp.exec_cmd("hyprctl dispatch exit"))
+island.bind("SUPER + SHIFT + R", "Restart waybar", "island-restart-waybar")
