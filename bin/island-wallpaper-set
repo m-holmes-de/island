@@ -1,0 +1,45 @@
+#!/bin/bash
+# island:summary=Set the desktop and lock screen wallpaper.
+# island:args=<path-to-image>
+
+set -eEo pipefail
+
+if [[ -z "$1" ]]; then
+  echo "Usage: island-wallpaper-set <path-to-image>" >&2
+  exit 1
+fi
+
+WALLPAPER="$(realpath "$1")"
+
+if [[ ! -f "$WALLPAPER" ]]; then
+  echo "File does not exist: $WALLPAPER" >&2
+  exit 1
+fi
+
+STATE_DIR="$HOME/.local/state/island"
+mkdir -p "$STATE_DIR"
+
+# Save current wallpaper path
+echo "$WALLPAPER" > "$STATE_DIR/current-wallpaper"
+
+# Symlink for easy reference
+ln -nsf "$WALLPAPER" "$STATE_DIR/current-wallpaper-link"
+
+# Update desktop background (swaybg)
+pkill -x swaybg 2>/dev/null || true
+setsid swaybg -i "$WALLPAPER" -m fill >/dev/null 2>&1 &
+
+# Update lock screen (hyprlock) — set the path in hyprlock.conf
+HYPRLOCK="$HOME/.config/hypr/hyprlock.conf"
+if [[ -f "$HYPRLOCK" ]]; then
+  # Remove existing path line if present, add new one
+  if grep -q '^    path' "$HYPRLOCK"; then
+    sed -i "s|^    path.*|    path = $WALLPAPER|" "$HYPRLOCK"
+  else
+    # Add path after the first "background {" block's monitor line
+    sed -i "/^background {/,/^}/ { /^    monitor/a\\    path = $WALLPAPER
+    }" "$HYPRLOCK"
+  fi
+fi
+
+notify-send -u low "Wallpaper" "Set to $(basename "$WALLPAPER")"

@@ -9,6 +9,8 @@ island.bind("SUPER + B", "Browser", "firefox")
 island.bind("SUPER + E", "File manager", "thunar")
 island.bind("SUPER + V", "Clipboard history", "cliphist list | rofi -dmenu | cliphist decode | wl-copy")
 
+island.bind("SUPER + W", "Wallpaper selector", "island-wallpaper-select")
+
 -- === TUI Launchers ===
 island.bind("SUPER + N", "Network (impala)", island.tui("impala"))
 island.bind("SUPER + O", "Bluetooth (bluetui)", island.tui("bluetui"))
