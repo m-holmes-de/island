@@ -61,6 +61,12 @@ window#waybar {
     color: #eb6f92;
 }
 
+/* --- Recording indicator --- */
+
+#custom-recording.active {
+    color: #eb6f92;
+}
+
 /* --- Tooltip --- */
 
 tooltip {

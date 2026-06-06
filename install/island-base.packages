@@ -22,10 +22,11 @@ firefox
 thunar
 gvfs
 
-# Screenshots & Clipboard
+# Screenshots, Recording & Clipboard
 grim
 slurp
 satty
+wf-recorder
 wl-clipboard
 cliphist
 

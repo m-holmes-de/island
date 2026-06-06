@@ -1,0 +1,33 @@
+#!/bin/bash
+# island:summary=Take a screenshot (region, fullscreen, or to clipboard).
+# island:args=[region|full|clipboard]
+
+set -eEo pipefail
+
+MODE="${1:-region}"
+SCREENSHOT_DIR="${ISLAND_SCREENSHOT_DIR:-${XDG_PICTURES_DIR:-$HOME/Pictures}/Screenshots}"
+mkdir -p "$SCREENSHOT_DIR"
+FILENAME="$SCREENSHOT_DIR/screenshot-$(date +%Y-%m-%d_%H-%M-%S).png"
+
+case "$MODE" in
+  region)
+    grim -g "$(slurp -d)" "$FILENAME"
+    wl-copy < "$FILENAME"
+    satty --filename "$FILENAME" --output-filename "$FILENAME" || true
+    notify-send -u low "Screenshot" "Saved to $(basename "$FILENAME")"
+    ;;
+  full)
+    grim "$FILENAME"
+    wl-copy < "$FILENAME"
+    satty --filename "$FILENAME" --output-filename "$FILENAME" || true
+    notify-send -u low "Screenshot" "Saved to $(basename "$FILENAME")"
+    ;;
+  clipboard)
+    grim -g "$(slurp -d)" - | wl-copy
+    notify-send -u low "Screenshot" "Copied to clipboard"
+    ;;
+  *)
+    echo "Usage: island-capture-screenshot [region|full|clipboard]" >&2
+    exit 1
+    ;;
+esac

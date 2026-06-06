@@ -10,7 +10,8 @@
         "hyprland/workspaces"
     ],
     "modules-center": [
-        "clock"
+        "clock",
+        "custom/recording"
     ],
     "modules-right": [
         "tray",
@@ -91,5 +92,13 @@
 
     "tray": {
         "spacing": 8
+    },
+
+    "custom/recording": {
+        "exec": "~/.config/waybar/scripts/recording-indicator.sh",
+        "return-type": "json",
+        "interval": 1,
+        "signal": 8,
+        "on-click": "island-capture-recording"
     }
 }

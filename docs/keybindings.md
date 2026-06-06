@@ -77,13 +77,18 @@ All bindings use SUPER (Windows/Meta) as the primary modifier.
 | SUPER + Right click drag | Resize window |
 | SUPER + Scroll | Cycle workspaces |
 
-## Screenshots
+## Screenshots & Recording
 
 | Key | Action |
 |-----|--------|
-| Print | Screenshot region (edit with satty) |
-| SHIFT + Print | Screenshot fullscreen (edit with satty) |
-| SUPER + Print | Screenshot region to clipboard |
+| Print | Screenshot region (save + clipboard + satty editor) |
+| SHIFT + Print | Screenshot fullscreen (save + clipboard + satty editor) |
+| SUPER + Print | Screenshot region to clipboard only |
+| SUPER + SHIFT + Print | Toggle screen recording (region select) |
+| CTRL + SHIFT + Print | Toggle screen recording (fullscreen) |
+
+Screenshots saved to `~/Pictures/Screenshots/`. Recordings saved to `~/Videos/Recordings/`.
+A red 󰻂 icon appears in waybar while recording.
 
 ## Media
 

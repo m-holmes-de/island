@@ -1,0 +1,48 @@
+#!/bin/bash
+# island:summary=Toggle screen recording on/off.
+# island:args=[region|full]
+
+set -eEo pipefail
+
+RECORDING_DIR="${ISLAND_RECORDING_DIR:-${XDG_VIDEOS_DIR:-$HOME/Videos}/Recordings}"
+STATE_FILE="/tmp/island-recording-pid"
+
+# Toggle off if already recording
+if [[ -f "$STATE_FILE" ]]; then
+  PID=$(cat "$STATE_FILE")
+  if kill -0 "$PID" 2>/dev/null; then
+    kill -INT "$PID"
+    rm -f "$STATE_FILE"
+    # Signal waybar to update recording indicator
+    pkill -RTMIN+8 waybar 2>/dev/null || true
+    notify-send -u low "Recording" "Stopped"
+    exit 0
+  else
+    rm -f "$STATE_FILE"
+  fi
+fi
+
+# Start new recording
+MODE="${1:-region}"
+mkdir -p "$RECORDING_DIR"
+FILENAME="$RECORDING_DIR/recording-$(date +%Y-%m-%d_%H-%M-%S).mp4"
+
+case "$MODE" in
+  region)
+    GEOMETRY=$(slurp -d) || exit 0
+    wf-recorder -g "$GEOMETRY" -f "$FILENAME" &
+    ;;
+  full)
+    wf-recorder -f "$FILENAME" &
+    ;;
+  *)
+    echo "Usage: island-capture-recording [region|full]" >&2
+    exit 1
+    ;;
+esac
+
+echo $! > "$STATE_FILE"
+
+# Signal waybar to update recording indicator
+pkill -RTMIN+8 waybar 2>/dev/null || true
+notify-send -u low "Recording" "Started — press SUPER+SHIFT+Print to stop"

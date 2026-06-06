@@ -78,10 +78,12 @@ island.bind("ALT + TAB", "Bring to top", hl.dsp.window.bring_to_top())
 island.bind("ALT + SHIFT + TAB", "Previous window", hl.dsp.window.cycle_next({ next = false }))
 island.bind("ALT + SHIFT + TAB", "Bring to top", hl.dsp.window.bring_to_top())
 
--- === Screenshots ===
-island.bind("Print", "Screenshot (region)", 'grim -g "$(slurp -d)" - | satty --filename -')
-island.bind("SHIFT + Print", "Screenshot (full)", "grim - | satty --filename -")
-island.bind("SUPER + Print", "Screenshot to clipboard", 'grim -g "$(slurp -d)" - | wl-copy')
+-- === Screenshots & Recording ===
+island.bind("Print", "Screenshot (region)", "island-capture-screenshot region")
+island.bind("SHIFT + Print", "Screenshot (full)", "island-capture-screenshot full")
+island.bind("SUPER + Print", "Screenshot to clipboard", "island-capture-screenshot clipboard")
+island.bind("SUPER + SHIFT + Print", "Toggle recording (region)", "island-capture-recording region")
+island.bind("CTRL + SHIFT + Print", "Toggle recording (full)", "island-capture-recording full")
 
 -- === Media Keys ===
 island.bind("XF86AudioRaiseVolume", nil, "pamixer -i 5", { locked = true, repeating = true })

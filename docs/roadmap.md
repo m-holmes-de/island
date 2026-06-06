@@ -2,16 +2,12 @@
 
 ## Phase 2 — Planned Features
 
-### Clipboard Manager
-- Visual clipboard manager UI (beyond `cliphist list | rofi -dmenu`)
-- Consider [clipman](https://github.com/chmouel/clipman) or [clipse](https://github.com/savedra1/clipse) for a TUI approach
-- Should support text and images
+### ~~Clipboard Manager~~ — Done
+Using `cliphist` with rofi (SUPER+V).
 
-### Screenshots & Screen Recording
-- Current: grim + slurp + satty for screenshots
-- Add screen recording (video clips) — consider [wf-recorder](https://github.com/ammen99/wf-recorder) or [gpu-screen-recorder](https://git.dec05eba.com/gpu-screen-recorder/about/)
-- Waybar indicator when recording
-- Ensure copy/paste of screenshots into terminal works (wl-clipboard integration)
+### ~~Screenshots & Screen Recording~~ — Done
+Screenshots via `island-capture-screenshot` (grim + slurp + satty).
+Recording via `island-capture-recording` (wf-recorder) with waybar indicator.
 
 ### Keybinding Viewer
 - On-screen keybinding cheat sheet / help overlay
