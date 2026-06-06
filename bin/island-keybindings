@@ -34,5 +34,4 @@ fi
     -theme-str 'listview { lines: 20; }' \
     -theme-str 'window { width: 700px; }' \
     -theme-str 'element { font: "JetBrains Mono Nerd Font 12"; }' \
-    -theme-str 'inputbar { enabled: false; }' \
     || true
