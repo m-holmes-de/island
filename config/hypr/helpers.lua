@@ -2,8 +2,22 @@
 
 island = island or {}
 
+local home = os.getenv("HOME")
+island.path = home .. "/.local/share/island"
+island.bin = island.path .. "/bin"
+
 local function shell_quote(value)
   return "'" .. tostring(value):gsub("'", "'\\''") .. "'"
+end
+
+-- Resolve island- commands to full path
+local function resolve_cmd(cmd)
+  if cmd:match("^island%-") then
+    local script = island.bin .. "/" .. cmd:match("^(%S+)")
+    local rest = cmd:match("^%S+(.*)") or ""
+    return script .. rest
+  end
+  return cmd
 end
 
 -- Bind a key to a command with a description
@@ -14,7 +28,7 @@ function island.bind(keys, description, action, options)
   end
 
   if type(action) == "string" then
-    action = hl.dsp.exec_cmd(action)
+    action = hl.dsp.exec_cmd(resolve_cmd(action))
   end
 
   hl.bind(keys, action, opts)
@@ -23,7 +37,7 @@ end
 -- Launch a command (exec-once equivalent)
 function island.exec_on_start(command)
   hl.on("hyprland.start", function()
-    hl.exec_cmd(command)
+    hl.exec_cmd(resolve_cmd(command))
   end)
 end
 
