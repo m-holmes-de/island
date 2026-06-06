@@ -1,0 +1,130 @@
+format = """
+$username\
+$directory\
+$git_branch\
+$git_status\
+$fill\
+$python\
+$lua\
+$nodejs\
+$golang\
+$haskell\
+$rust\
+$ruby\
+$aws\
+$docker_context\
+$jobs\
+$cmd_duration\
+$line_break\
+$character"""
+
+add_newline = false
+palette = "rose_pine"
+
+[directory]
+style = 'bold fg:foam'
+format = '[  $path ]($style)'
+truncation_length = 3
+truncation_symbol = '…/'
+truncate_to_repo = false
+
+[directory.substitutions]
+'Documents' = '󰈙'
+'Downloads' = ' '
+'Music' = ' '
+'Pictures' = ' '
+
+[git_branch]
+style = 'fg:pine'
+symbol = ' '
+format = '[on](subtle) [$symbol$branch ]($style)'
+
+[git_status]
+style = 'fg:love'
+format = '([$all_status$ahead_behind]($style) )'
+
+[fill]
+symbol = ' '
+
+[python]
+style = 'fg:iris'
+symbol = ' '
+format = '[${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
+pyenv_version_name = true
+pyenv_prefix = ''
+
+[lua]
+style = 'fg:iris'
+format = '[$symbol($version )]($style)'
+symbol = ' '
+
+[nodejs]
+style = 'fg:foam'
+symbol = ' '
+
+[golang]
+style = 'fg:foam'
+symbol = ' '
+
+[haskell]
+style = 'fg:iris'
+symbol = ' '
+
+[rust]
+style = 'fg:love'
+symbol = ' '
+
+[ruby]
+style = 'fg:love'
+symbol = ' '
+
+[package]
+symbol = '󰏗 '
+
+[aws]
+symbol = ' '
+style = 'fg:gold'
+format = '[$symbol($profile )(\[$duration\] )]($style)'
+
+[docker_context]
+symbol = ' '
+style = 'fg:foam'
+format = '[$symbol]($style) $path'
+detect_files = ['docker-compose.yml', 'docker-compose.yaml', 'Dockerfile']
+detect_extensions = ['Dockerfile']
+
+[jobs]
+symbol = ' '
+style = 'fg:love'
+number_threshold = 1
+format = '[$symbol]($style)'
+
+[cmd_duration]
+min_time = 500
+style = 'fg:muted'
+format = '[$duration]($style)'
+
+[username]
+show_always = true
+style_user = 'fg:iris'
+style_root = 'bold fg:love'
+format = '[ $user](bold $style) [in](subtle) '
+
+[hostname]
+ssh_only = false
+style = 'fg:foam'
+format = '[@$hostname ]($style)'
+
+[palettes.rose_pine]
+love = "#eb6f92"
+gold = "#f6c177"
+rose = "#ebbcba"
+pine = "#31748f"
+foam = "#9ccfd8"
+iris = "#c4a7e7"
+text = "#e0def4"
+subtle = "#908caa"
+muted = "#6e6a86"
+overlay = "#26233a"
+surface = "#1f1d2e"
+base = "#191724"
