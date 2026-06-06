@@ -3,6 +3,7 @@
 
 set -eEo pipefail
 
+ISLAND_PATH="${ISLAND_PATH:-$HOME/.local/share/island}"
 WALLPAPER_DIR="${1:-$HOME/wallpapers}"
 
 if [[ ! -d "$WALLPAPER_DIR" ]]; then
@@ -11,43 +12,46 @@ if [[ ! -d "$WALLPAPER_DIR" ]]; then
 fi
 
 while true; do
-  # Build list: folders first (with / suffix), then image files
-  entries=()
+  # Build rofi input: entries with icon metadata for image previews
+  rofi_input=""
 
   # Add parent navigation if we're in a subfolder
   if [[ "$WALLPAPER_DIR" != "$HOME/wallpapers" ]]; then
-    entries+=("..")
+    rofi_input+=$'..\0icon\x1ffolder\n'
   fi
 
   # Add directories
   while IFS= read -r dir; do
-    entries+=("$(basename "$dir")/")
-  done < <(find "$WALLPAPER_DIR" -mindepth 1 -maxdepth 1 -type d | sort)
+    name="$(basename "$dir")"
+    rofi_input+="${name}/\0icon\x1ffolder\n"
+  done < <(find "$WALLPAPER_DIR" -mindepth 1 -maxdepth 1 -type d 2>/dev/null | sort)
 
-  # Add image files
+  # Add image files with preview icons
   while IFS= read -r file; do
-    entries+=("$(basename "$file")")
+    name="$(basename "$file")"
+    rofi_input+="${name}\0icon\x1f${file}\n"
   done < <(find "$WALLPAPER_DIR" -mindepth 1 -maxdepth 1 -type f \
-    \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' -o -iname '*.webp' -o -iname '*.bmp' \) | sort)
+    \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' -o -iname '*.webp' -o -iname '*.bmp' \) 2>/dev/null | sort)
 
-  if (( ${#entries[@]} == 0 )); then
+  if [[ -z "$rofi_input" ]]; then
     notify-send -u normal "Wallpaper" "No images found in $WALLPAPER_DIR"
     exit 1
   fi
 
-  # Show rofi menu
-  selected=$(printf '%s\n' "${entries[@]}" | rofi -dmenu -p "Wallpaper" -i) || exit 0
+  # Show rofi with icons
+  selected=$(echo -en "$rofi_input" | rofi -dmenu -p "Wallpaper" -i -show-icons \
+    -theme-str 'element-icon { size: 64px; }' \
+    -theme-str 'listview { lines: 6; }' \
+    -theme-str 'element { padding: 8px; }') || exit 0
 
   if [[ "$selected" == ".." ]]; then
     WALLPAPER_DIR="$(dirname "$WALLPAPER_DIR")"
     continue
   elif [[ "$selected" == */ ]]; then
-    # Navigate into subfolder
     WALLPAPER_DIR="$WALLPAPER_DIR/${selected%/}"
     continue
   else
-    # Image selected — set it
-    island-wallpaper-set "$WALLPAPER_DIR/$selected"
+    "$ISLAND_PATH/bin/island-wallpaper-set" "$WALLPAPER_DIR/$selected"
     exit 0
   fi
 done
