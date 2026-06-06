@@ -23,9 +23,9 @@
     "hyprland/workspaces": {
         "format": "{icon}",
         "format-icons": {
-            "active": "\u25cf",
-            "default": "\u25cb",
-            "empty": "\u25cb"
+            "active": "●",
+            "default": "○",
+            "empty": "○"
         },
         "on-click": "activate",
         "sort-by-number": true
@@ -43,27 +43,34 @@
 
     "pulseaudio": {
         "format": "{icon} {volume}%",
-        "format-muted": "\ud83d\udd07 muted",
+        "format-muted": "󰝟 muted",
         "format-icons": {
-            "default": ["\ud83d\udd08", "\ud83d\udd09", "\ud83d\udd0a"]
+            "default": ["󰕿", "󰖀", "󰕾"]
         },
         "on-click": "ghostty -e pulsemixer"
     },
 
     "network": {
-        "format-wifi": "\u25c9 {signalStrength}%",
-        "format-ethernet": "\u25c8",
-        "format-disconnected": "\u25cb",
-        "tooltip-format-wifi": "{essid} ({signalStrength}%)",
+        "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
+        "format": "{icon}",
+        "format-wifi": "{icon} {signalStrength}%",
+        "format-ethernet": "󰀂",
+        "format-disconnected": "󰤮",
+        "tooltip-format-wifi": "{essid} ({signalStrength}%)\n{ipaddr}",
         "tooltip-format-ethernet": "{ifname}: {ipaddr}",
+        "tooltip-format-disconnected": "Disconnected",
         "on-click": "ghostty -e impala"
     },
 
     "bluetooth": {
-        "format": "\u25cf",
-        "format-disabled": "\u25cb",
-        "format-connected": "\u25cf {num_connections}",
+        "format": "󰂯",
+        "format-off": "󰂲",
+        "format-disabled": "󰂲",
+        "format-connected": "󰂱 {num_connections}",
+        "format-no-controller": "",
         "tooltip-format": "{controller_alias}\n{num_connections} connected",
+        "tooltip-format-connected": "{controller_alias}\n{num_connections} connected\n\n{device_enumerate}",
+        "tooltip-format-enumerate-connected": "{device_alias}",
         "on-click": "ghostty -e bluetui"
     },
 
@@ -73,9 +80,9 @@
             "critical": 15
         },
         "format": "{icon} {capacity}%",
-        "format-charging": "\u26a1 {capacity}%",
-        "format-plugged": "\u26a1 {capacity}%",
-        "format-icons": ["\u2581", "\u2582", "\u2583", "\u2584", "\u2585", "\u2586", "\u2587", "\u2588"]
+        "format-charging": "󰂄 {capacity}%",
+        "format-plugged": "󰚥 {capacity}%",
+        "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
     },
 
     "tray": {
@@ -83,7 +90,7 @@
     },
 
     "custom/power": {
-        "format": "\u23fb",
+        "format": "⏻",
         "on-click": "hyprlock",
         "tooltip": false
     }
