@@ -22,97 +22,96 @@ add_newline = false
 palette = "rose_pine"
 
 [directory]
-style = 'bold fg:foam'
-format = '[  $path ]($style)'
+style = 'bold fg:blue'
+format = '[  $path ]($style)'
 truncation_length = 3
 truncation_symbol = '…/'
 truncate_to_repo = false
 
 [directory.substitutions]
 'Documents' = '󰈙'
-'Downloads' = ' '
-'Music' = ' '
-'Pictures' = ' '
+'Downloads' = ' '
+'Music' = ' '
+'Pictures' = ' '
 
 [git_branch]
-style = 'fg:pine'
-symbol = ' '
-format = '[on](subtle) [$symbol$branch ]($style)'
+style = 'fg:green'
+symbol = ' '
+format = '[on](white) [$symbol$branch ]($style)'
 
 [git_status]
-style = 'fg:love'
+style = 'fg:red'
 format = '([$all_status$ahead_behind]($style) )'
 
 [fill]
 symbol = ' '
 
 [python]
-style = 'fg:iris'
-symbol = ' '
+style = 'teal'
+symbol = ' '
 format = '[${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
 pyenv_version_name = true
 pyenv_prefix = ''
 
 [lua]
-style = 'fg:iris'
 format = '[$symbol($version )]($style)'
-symbol = ' '
+symbol = ' '
 
 [nodejs]
-style = 'fg:foam'
-symbol = ' '
+style = 'blue'
+symbol = ' '
 
 [golang]
-style = 'fg:foam'
-symbol = ' '
+style = 'blue'
+symbol = ' '
 
 [haskell]
-style = 'fg:iris'
-symbol = ' '
+style = 'blue'
+symbol = ' '
 
 [rust]
-style = 'fg:love'
-symbol = ' '
+style = 'fg:red'
+symbol = ' '
 
 [ruby]
-style = 'fg:love'
-symbol = ' '
+style = 'blue'
+symbol = ' '
 
 [package]
 symbol = '󰏗 '
 
 [aws]
-symbol = ' '
-style = 'fg:gold'
+symbol = ' '
+style = 'yellow'
 format = '[$symbol($profile )(\[$duration\] )]($style)'
 
 [docker_context]
-symbol = ' '
-style = 'fg:foam'
+symbol = ' '
+style = 'fg:teal'
 format = '[$symbol]($style) $path'
 detect_files = ['docker-compose.yml', 'docker-compose.yaml', 'Dockerfile']
 detect_extensions = ['Dockerfile']
 
 [jobs]
-symbol = ' '
-style = 'fg:love'
+symbol = ' '
+style = 'red'
 number_threshold = 1
 format = '[$symbol]($style)'
 
 [cmd_duration]
 min_time = 500
-style = 'fg:muted'
+style = 'fg:gray'
 format = '[$duration]($style)'
 
 [username]
 show_always = true
-style_user = 'fg:iris'
-style_root = 'bold fg:love'
-format = '[ $user](bold $style) [in](subtle) '
+style_user = 'fg:mauve'
+style_root = 'bold fg:red'
+format = '[ $user](bold $style) [in](white) '
 
 [hostname]
 ssh_only = false
-style = 'fg:foam'
+style = 'fg:blue'
 format = '[@$hostname ]($style)'
 
 [palettes.rose_pine]
@@ -128,3 +127,12 @@ muted = "#6e6a86"
 overlay = "#26233a"
 surface = "#1f1d2e"
 base = "#191724"
+# Aliases for starship built-in color names
+red = "#eb6f92"
+green = "#31748f"
+blue = "#9ccfd8"
+yellow = "#f6c177"
+teal = "#9ccfd8"
+mauve = "#c4a7e7"
+gray = "#6e6a86"
+white = "#e0def4"
