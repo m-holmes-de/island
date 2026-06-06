@@ -20,6 +20,9 @@ source "$ISLAND_INSTALL/helpers/all.sh"
 island_header
 echo "  Installing Island desktop environment..."
 
+# Cache sudo credentials upfront so logged scripts can use sudo
+sudo -v || exit 1
+
 source "$ISLAND_INSTALL/preflight/all.sh"
 source "$ISLAND_INSTALL/packaging/all.sh"
 source "$ISLAND_INSTALL/config/all.sh"
