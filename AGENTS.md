@@ -68,6 +68,52 @@ echo "Switch keyboard layout to de"
 sed -i 's/kb_layout = "us"/kb_layout = "de"/' ~/.config/hypr/input.lua
 ```
 
+# Development Process
+
+## Commit checklist
+
+Before every commit, verify:
+
+1. **Migration required?** If any file under `config/` was changed, there MUST be
+   a corresponding migration in `migrations/`. No exceptions.
+2. **Defaults updated?** If a migration patches a deployed config, the matching
+   file in `config/` must also be updated (for fresh installs).
+3. **Idempotent?** Run `island-migrate` twice — the second run should skip or
+   no-op every migration.
+4. **Syntax check?** `bash -n` on all new/modified shell scripts.
+5. **Deployed?** After committing, `rsync` to `~/.local/share/island/` and run
+   `island-migrate` to apply changes to the live system.
+
+## Deploy workflow
+
+```bash
+# 1. Make changes in the repo
+# 2. Sync to install location
+rsync -a --delete --exclude='.git' . ~/.local/share/island/
+# 3. Run migrations
+island-migrate
+# 4. Reload Hyprland to pick up config changes
+# SUPER+SHIFT+W or: hyprctl reload
+```
+
+## Hyprland Lua helpers
+
+All `island-*` commands are auto-resolved to their full path by the `resolve_cmd`
+function in `helpers.lua`. You don't need to use full paths in bindings or
+autostart — just use the command name (e.g., `"island-wallpaper-select"`).
+
+## Hiding apps from rofi
+
+To hide an app from the rofi launcher:
+1. Add a file `applications/hidden/<app-name>.desktop` containing:
+   ```
+   [Desktop Entry]
+   Type=Application
+   NoDisplay=true
+   Hidden=true
+   ```
+2. Create a migration that copies it to `~/.local/share/applications/`
+
 # Install Scripts
 
 - `install/*/all.sh` orchestrate each phase
