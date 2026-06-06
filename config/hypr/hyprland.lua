@@ -8,6 +8,7 @@ package.path = os.getenv("HOME") .. "/.config/?.lua;" .. package.path
 require("hypr.helpers")
 
 -- Core configuration
+require("hypr.envs")
 require("hypr.monitors")
 require("hypr.input")
 require("hypr.appearance")
