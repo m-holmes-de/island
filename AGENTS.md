@@ -21,6 +21,7 @@ All commands start with `island-`. Prefixes indicate purpose:
 # Config Files
 
 - `config/` - default configs, copied to `~/.config/` with `cp -n` (no overwrite)
+- `default/` - home-directory dotfiles, copied to `$HOME` with `cp -n` (for files like `.zshrc` that live outside `~/.config/`)
 - Hyprland uses Lua scripting (`.lua` files) with `require()` for modularity
 - Waybar uses JSONC (config.jsonc) and CSS (style.css)
 - Rofi uses `.rasi` format

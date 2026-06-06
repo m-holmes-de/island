@@ -57,6 +57,18 @@ noto-fonts-emoji
 qt5-wayland
 qt6-wayland
 
+# Shell
+zsh
+starship
+zoxide
+
+# Editor & Terminal Multiplexer
+neovim
+tmux
+lazygit
+yazi
+npm
+
 # TUI tools
 btop
 

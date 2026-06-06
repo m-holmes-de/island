@@ -17,15 +17,14 @@ Rofi-based viewer parsing bindings.lua. SUPER+/ to open.
 - Theme switching should update: Hyprland borders, Waybar, Rofi, Mako, Ghostty, Hyprlock, tmux, Neovim
 - Consider [matugen](https://github.com/InioX/matugen) for wallpaper-based color generation
 
-### Neovim Configuration
-- Based on [LazyVim](https://www.lazyvim.org/) distribution
-- Themed to match current Island color scheme
-- Config lives in `config/nvim/`
+### ~~Neovim Configuration~~ — Done
+LazyVim-based with Rose Pine main variant. Config in `config/nvim/`.
 
-### Tmux Configuration
-- Based on user's current tmux config
-- Themed to match current Island color scheme
-- Config lives in `config/tmux/`
+### ~~Tmux Configuration~~ — Done
+Rose Pine themed, Ctrl+Space prefix, vi mode, TPM plugins. Config in `config/tmux/`.
+
+### ~~ZSH Configuration~~ — Done
+Zinit plugins, starship prompt, vi mode, fzf, zoxide. Config in `default/.zshrc`.
 
 ## Future Ideas
 

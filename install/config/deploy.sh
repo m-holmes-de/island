@@ -17,3 +17,10 @@ for file in "$ISLAND_PATH"/config/*; do
 done
 
 echo "Configs deployed to ~/.config/"
+
+# Deploy home-directory dotfiles (.zshrc, etc.)
+for file in "$ISLAND_PATH"/default/.*; do
+  [[ -f "$file" ]] || continue
+  cp -n "$file" ~/ 2>/dev/null || true
+done
+echo "Home dotfiles deployed."

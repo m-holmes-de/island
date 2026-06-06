@@ -8,16 +8,17 @@ It uses a migration-based install system inspired by Omarchy (basecamp/omarchy).
 - `install.sh` - Entry point, sources install phases in order
 - `bin/` - CLI tools, all prefixed with `island-`
 - `config/` - Default configs, copied to `~/.config/` on install (never overwrites)
+- `default/` - Home-directory dotfiles (.zshrc), copied to `$HOME` on install (never overwrites)
 - `install/` - Install phase scripts (preflight, packaging, config, post-install)
 - `migrations/` - Timestamped migration scripts for evolving the system
-- `default/` - Default dotfiles (bashrc additions, etc.)
 - `docs/` - Documentation
 
 ## Key paths at runtime
 - Install location: `~/.local/share/island/`
 - State: `~/.local/state/island/`
 - Migration state: `~/.local/state/island/migrations/`
-- User configs: `~/.config/hypr/`, `~/.config/waybar/`, etc.
+- User configs: `~/.config/hypr/`, `~/.config/waybar/`, `~/.config/tmux/`, `~/.config/nvim/`
+- Home dotfiles: `~/.zshrc`
 
 ## Development commands
 - `./install.sh` - Run full install (idempotent, safe to re-run)
