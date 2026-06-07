@@ -54,7 +54,7 @@ noto-fonts
 noto-fonts-emoji
 
 # Theming
-tela-circle-icon-theme-black
+tela-circle-icon-theme-purple
 
 # Wayland compat
 qt5-wayland
