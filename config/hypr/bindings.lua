@@ -6,7 +6,8 @@
 island.bind("SUPER + RETURN", "Terminal", "ghostty")
 island.bind("SUPER + SPACE", "App launcher", "rofi -show drun -show-icons")
 island.bind("SUPER + B", "Browser", "firefox")
-island.bind("SUPER + E", "File manager", "thunar")
+island.bind("SUPER + E", "File manager (Thunar)", "thunar")
+island.bind("SUPER + Y", "File manager (yazi)", island.tui("yazi"))
 island.bind("SUPER + V", "Clipboard history", "cliphist list | rofi -dmenu | cliphist decode | wl-copy")
 
 island.bind("SUPER + W", "Wallpaper selector", "island-wallpaper-select")
