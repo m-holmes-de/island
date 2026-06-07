@@ -53,6 +53,9 @@ ttf-jetbrains-mono-nerd
 noto-fonts
 noto-fonts-emoji
 
+# Theming
+tela-circle-icon-theme-black
+
 # Wayland compat
 qt5-wayland
 qt6-wayland
