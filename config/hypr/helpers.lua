@@ -41,9 +41,9 @@ function island.exec_on_start(command)
   end)
 end
 
--- Launch a TUI app in ghostty
+-- Launch a TUI app in ghostty (floating centered window)
 function island.tui(command)
-  return "ghostty -e " .. shell_quote(command)
+  return "ghostty --title='Island TUI' -e " .. shell_quote(command)
 end
 
 -- Send a notification

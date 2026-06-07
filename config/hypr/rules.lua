@@ -1,6 +1,9 @@
 -- Window rules
 -- https://wiki.hyprland.org/Configuring/Window-Rules/
 
+-- TUI apps (opened via island.tui) — floating, centered
+island.window({ title = "^Island TUI$" }, { float = true, center = true, size = { 900, 600 } })
+
 -- Float common dialogs
 island.window("pavucontrol", { float = true })
 island.window("pulsemixer", { float = true })
