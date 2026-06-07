@@ -24,3 +24,10 @@ for file in "$ISLAND_PATH"/default/.*; do
   cp -n "$file" ~/ 2>/dev/null || true
 done
 echo "Home dotfiles deployed."
+
+# Deploy hidden app .desktop overrides
+if [[ -d "$ISLAND_PATH/applications/hidden" ]]; then
+  mkdir -p ~/.local/share/applications
+  cp -n "$ISLAND_PATH"/applications/hidden/*.desktop ~/.local/share/applications/ 2>/dev/null || true
+  echo "Hidden app overrides deployed."
+fi

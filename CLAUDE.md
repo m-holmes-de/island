@@ -29,6 +29,8 @@ It uses a migration-based install system inspired by Omarchy (basecamp/omarchy).
 - All scripts use `#!/bin/bash` with `set -eEo pipefail`
 - Two spaces for indentation, no tabs
 - Package lists in `.packages` files (comments with #, one package per line)
+- `island-base.packages` for official repo packages (pacman)
+- `island-aur.packages` for AUR-only packages (yay) — keep these separate
 - Configs use native formats: .lua for hyprland, JSONC for waybar, .rasi for rofi
 - All bin/ scripts are prefixed `island-`
 - Use `[[ ]]` for string/file tests, `(( ))` for numeric

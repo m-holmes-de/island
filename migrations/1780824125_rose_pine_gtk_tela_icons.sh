@@ -3,7 +3,7 @@ echo "Install Rose Pine GTK theme and Tela Circle Black icons for Thunar"
 ISLAND_PATH="${ISLAND_PATH:-$HOME/.local/share/island}"
 
 # --- Install Tela Circle icons (official repos) ---
-"$ISLAND_PATH/bin/island-pkg-add" tela-circle-icon-theme-black
+"$ISLAND_PATH/bin/island-pkg-add" tela-circle-icon-theme-purple
 
 # --- Install Rose Pine GTK theme (AUR) ---
 "$ISLAND_PATH/bin/island-pkg-aur-add" rose-pine-gtk-theme

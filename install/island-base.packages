@@ -55,6 +55,7 @@ noto-fonts-emoji
 
 # Theming
 tela-circle-icon-theme-purple
+adw-gtk-theme
 
 # Wayland compat
 qt5-wayland
@@ -76,9 +77,12 @@ npm
 btop
 
 # Utilities
+git
 jq
 ripgrep
 fd
 fzf
+eza
+bat
 polkit-gnome
 unzip
