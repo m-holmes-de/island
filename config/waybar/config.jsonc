@@ -5,6 +5,7 @@
     "margin-top": 6,
     "margin-left": 10,
     "margin-right": 10,
+    "spacing": 0,
 
     "modules-left": [
         "hyprland/workspaces"
@@ -22,12 +23,7 @@
     ],
 
     "hyprland/workspaces": {
-        "format": "{icon}",
-        "format-icons": {
-            "active": "●",
-            "default": "○",
-            "empty": "○"
-        },
+        "format": "{id}",
         "on-click": "activate",
         "sort-by-number": true,
         "persistent-workspaces": {
@@ -41,17 +37,18 @@
     },
 
     "clock": {
-        "format": "  {:%H:%M}",
-        "format-alt": "  {:%A, %B %d  %H:%M}",
+        "format": "{:%H:%M, %e}",
+        "format-alt": "{:%A %B %d  %H:%M}",
         "tooltip-format": "<tt><small>{calendar}</small></tt>"
     },
 
     "pulseaudio": {
-        "format": "{icon}  {volume}%",
-        "format-muted": "󰝟  muted",
+        "format": "{icon}",
+        "format-muted": "󰝟",
         "format-icons": {
             "default": ["󰕿", "󰖀", "󰕾"]
         },
+        "tooltip-format": "{volume}%",
         "on-click": "ghostty --title='Island TUI' -e pulsemixer"
     },
 
@@ -71,7 +68,7 @@
         "format": "󰂯",
         "format-off": "󰂲",
         "format-disabled": "󰂲",
-        "format-connected": "󰂱 {num_connections}",
+        "format-connected": "󰂱",
         "format-no-controller": "",
         "tooltip-format": "{controller_alias}\n{num_connections} connected",
         "tooltip-format-connected": "{controller_alias}\n{num_connections} connected\n\n{device_enumerate}",
@@ -84,14 +81,14 @@
             "warning": 30,
             "critical": 15
         },
-        "format": "{icon}  {capacity}%",
-        "format-charging": "󰂄  {capacity}%",
-        "format-plugged": "󰚥  {capacity}%",
+        "format": "{icon} {capacity}%",
+        "format-charging": "󰂄 {capacity}%",
+        "format-plugged": "󰚥 {capacity}%",
         "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
     },
 
     "tray": {
-        "spacing": 8
+        "spacing": 4
     },
 
     "custom/recording": {
