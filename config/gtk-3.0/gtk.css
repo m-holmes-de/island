@@ -1,11 +1,11 @@
 /* Island Rose Pine color overrides for adw-gtk3-dark */
-@define-color window_bg_color #191724;
-@define-color view_bg_color #1f1d2e;
-@define-color headerbar_bg_color #26233a;
-@define-color headerbar_backdrop_color #191724;
-@define-color card_bg_color #1f1d2e;
-@define-color sidebar_bg_color #1f1d2e;
-@define-color sidebar_backdrop_color #191724;
+@define-color window_bg_color alpha(#191724, 0.92);
+@define-color view_bg_color alpha(#1f1d2e, 0.90);
+@define-color headerbar_bg_color alpha(#26233a, 0.95);
+@define-color headerbar_backdrop_color alpha(#191724, 0.92);
+@define-color card_bg_color alpha(#1f1d2e, 0.90);
+@define-color sidebar_bg_color alpha(#1f1d2e, 0.90);
+@define-color sidebar_backdrop_color alpha(#191724, 0.92);
 @define-color accent_bg_color #31748f;
 @define-color accent_fg_color #e0def4;
 @define-color accent_color #31748f;
