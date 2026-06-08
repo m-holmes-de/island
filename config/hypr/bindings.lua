@@ -51,6 +51,8 @@ island.bind(HYPER .. " + SHIFT + UP", "Move window up", hl.dsp.window.swap({ dir
 island.bind(HYPER .. " + SHIFT + DOWN", "Move window down", hl.dsp.window.swap({ direction = "d" }))
 
 -- === Window Resize ===
+island.bind(HYPER .. " + SHIFT + S", "Shrink window", hl.dsp.window.resize({ x = -60, y = -60, relative = true }))
+island.bind(HYPER .. " + SHIFT + D", "Grow window", hl.dsp.window.resize({ x = 60, y = 60, relative = true }))
 island.bind("SUPER + CTRL + H", "Shrink width", hl.dsp.window.resize({ x = -40, y = 0, relative = true }))
 island.bind("SUPER + CTRL + L", "Grow width", hl.dsp.window.resize({ x = 40, y = 0, relative = true }))
 island.bind("SUPER + CTRL + K", "Shrink height", hl.dsp.window.resize({ x = 0, y = -40, relative = true }))
