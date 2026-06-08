@@ -31,6 +31,17 @@ echo "Switching to theme: $THEME"
 # Load color definitions
 source "$THEME_DIR/colors.sh"
 
+# Apply dark background override
+if [[ "$2" == "--dark" ]]; then
+  THEME_BG="#000000"
+  THEME_BG_ALT="#0a0a0a"
+  THEME_BG_HIGHLIGHT="#141414"
+  THEME_BASE="#000000"
+  THEME_SURFACE="#0a0a0a"
+  THEME_OVERLAY="#141414"
+  THEME_NAME="${THEME_NAME} (dark)"
+fi
+
 # Generate _STRIP variants (hex without #)
 THEME_BG_STRIP="${THEME_BG#\#}"
 THEME_BG_ALT_STRIP="${THEME_BG_ALT#\#}"
@@ -122,7 +133,11 @@ NVEOF
 
 # Save current theme name
 mkdir -p "$STATE_DIR"
-echo "$THEME" > "$STATE_DIR/current-theme"
+if [[ "$2" == "--dark" ]]; then
+  echo "${THEME}:dark" > "$STATE_DIR/current-theme"
+else
+  echo "$THEME" > "$STATE_DIR/current-theme"
+fi
 
 # Restart components
 echo "  Restarting components..."

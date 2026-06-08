@@ -6,21 +6,31 @@ set -eEo pipefail
 ISLAND_PATH="${ISLAND_PATH:-$HOME/.local/share/island}"
 CURRENT=$(cat "$HOME/.local/state/island/current-theme" 2>/dev/null || echo "none")
 
-# Build list of themes
+# Build list of themes (normal + dark variants)
 themes=()
 for dir in "$ISLAND_PATH"/themes/*/; do
   [[ -d "$dir" ]] || continue
   name=$(basename "$dir")
-  if [[ "$name" == "$CURRENT" ]]; then
-    themes+=("$name (active)")
-  else
-    themes+=("$name")
-  fi
+  for variant in "$name" "$name (dark)"; do
+    state="$name"
+    [[ "$variant" == *"(dark)"* ]] && state="${name}:dark"
+    if [[ "$state" == "$CURRENT" ]]; then
+      themes+=("$variant  ●")
+    else
+      themes+=("$variant")
+    fi
+  done
 done
 
 selected=$(printf '%s\n' "${themes[@]}" | rofi -dmenu -p "Theme" -i) || exit 0
 
-# Strip " (active)" suffix
-selected="${selected% (active)}"
+# Strip active marker
+selected="${selected%  ●}"
 
-"$ISLAND_PATH/bin/island-theme-set" "$selected"
+# Parse dark flag
+if [[ "$selected" == *"(dark)"* ]]; then
+  theme_name="${selected% (dark)}"
+  "$ISLAND_PATH/bin/island-theme-set" "$theme_name" --dark
+else
+  "$ISLAND_PATH/bin/island-theme-set" "$selected"
+fi
