@@ -53,12 +53,14 @@ island.bind("SUPER + CTRL + L", "Grow width", hl.dsp.window.resize({ x = 40, y =
 island.bind("SUPER + CTRL + K", "Shrink height", hl.dsp.window.resize({ x = 0, y = -40, relative = true }))
 island.bind("SUPER + CTRL + J", "Grow height", hl.dsp.window.resize({ x = 0, y = 40, relative = true }))
 
--- === Workspaces ===
+-- === Workspaces (Hyper = CapsLock hold = Super+Ctrl+Alt) ===
 for workspace = 1, 10 do
   local key = "code:" .. tostring(workspace + 9)
+  island.bind("SUPER + CTRL + ALT + " .. key, "Workspace " .. workspace, hl.dsp.focus({ workspace = tostring(workspace) }))
+  island.bind("SUPER + CTRL + ALT + SHIFT + " .. key, "Move to workspace " .. workspace, hl.dsp.window.move({ workspace = tostring(workspace) }))
+  -- Keep SUPER+number as fallback
   island.bind("SUPER + " .. key, "Workspace " .. workspace, hl.dsp.focus({ workspace = tostring(workspace) }))
   island.bind("SUPER + SHIFT + " .. key, "Move to workspace " .. workspace, hl.dsp.window.move({ workspace = tostring(workspace) }))
-  island.bind("SUPER + SHIFT + ALT + " .. key, "Move silently to workspace " .. workspace, hl.dsp.window.move({ workspace = tostring(workspace), follow = false }))
 end
 
 -- === Workspace Navigation ===
