@@ -1,15 +1,12 @@
+-- Rose Pine colorscheme (available for island-theme-set)
 return {
   "rose-pine/neovim",
   name = "rose-pine",
-  lazy = false,
-  priority = 1000,
+  lazy = true,
   config = function()
     require("rose-pine").setup({
       variant = "main",
-      styles = {
-        transparency = true,
-      },
+      styles = { transparency = true },
     })
-    vim.cmd("colorscheme rose-pine-main")
   end,
 }

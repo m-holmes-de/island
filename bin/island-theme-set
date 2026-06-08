@@ -1,0 +1,136 @@
+#!/bin/bash
+# island:summary=Switch the Island desktop theme.
+# island:args=<theme-name>
+
+set -eEo pipefail
+
+ISLAND_PATH="${ISLAND_PATH:-$HOME/.local/share/island}"
+STATE_DIR="$HOME/.local/state/island"
+
+if [[ -z "$1" ]]; then
+  echo "Available themes:"
+  for dir in "$ISLAND_PATH"/themes/*/; do
+    [[ -d "$dir" ]] || continue
+    basename "$dir"
+  done
+  echo ""
+  echo "Usage: island-theme-set <theme-name>"
+  exit 1
+fi
+
+THEME="$1"
+THEME_DIR="$ISLAND_PATH/themes/$THEME"
+
+if [[ ! -d "$THEME_DIR" ]]; then
+  echo "Error: Theme '$THEME' not found in $ISLAND_PATH/themes/" >&2
+  exit 1
+fi
+
+echo "Switching to theme: $THEME"
+
+# Load color definitions
+source "$THEME_DIR/colors.sh"
+
+# Generate _STRIP variants (hex without #)
+THEME_BG_STRIP="${THEME_BG#\#}"
+THEME_BG_ALT_STRIP="${THEME_BG_ALT#\#}"
+THEME_BG_HIGHLIGHT_STRIP="${THEME_BG_HIGHLIGHT#\#}"
+THEME_FG_STRIP="${THEME_FG#\#}"
+THEME_FG_DIM_STRIP="${THEME_FG_DIM#\#}"
+THEME_FG_MUTED_STRIP="${THEME_FG_MUTED#\#}"
+THEME_ACCENT_STRIP="${THEME_ACCENT#\#}"
+THEME_WARN_STRIP="${THEME_WARN#\#}"
+THEME_ERROR_STRIP="${THEME_ERROR#\#}"
+THEME_IRIS_STRIP="${THEME_IRIS#\#}"
+THEME_FOAM_STRIP="${THEME_FOAM#\#}"
+THEME_GOLD_STRIP="${THEME_GOLD#\#}"
+
+# Build sed substitution command
+build_sed() {
+  local vars=(
+    THEME_NAME THEME_BASE THEME_SURFACE THEME_OVERLAY
+    THEME_MUTED THEME_SUBTLE THEME_TEXT THEME_LOVE THEME_GOLD
+    THEME_ROSE THEME_PINE THEME_FOAM THEME_IRIS
+    THEME_BG THEME_BG_ALT THEME_BG_HIGHLIGHT
+    THEME_FG THEME_FG_DIM THEME_FG_MUTED
+    THEME_ACCENT THEME_WARN THEME_ERROR
+    THEME_BG_STRIP THEME_BG_ALT_STRIP THEME_BG_HIGHLIGHT_STRIP
+    THEME_FG_STRIP THEME_FG_DIM_STRIP THEME_FG_MUTED_STRIP
+    THEME_ACCENT_STRIP THEME_WARN_STRIP THEME_ERROR_STRIP
+    THEME_IRIS_STRIP THEME_FOAM_STRIP THEME_GOLD_STRIP
+    THEME_GHOSTTY THEME_NVIM_COLORSCHEME THEME_NVIM_PLUGIN THEME_NVIM_VARIANT
+  )
+  local sed_args=""
+  for var in "${vars[@]}"; do
+    sed_args+="s|{{${var}}}|${!var}|g;"
+  done
+  echo "$sed_args"
+}
+
+SED_CMD=$(build_sed)
+
+# Process templates
+process_template() {
+  local tpl="$1"
+  local dest="$2"
+  sed "$SED_CMD" "$tpl" > "$dest"
+}
+
+echo "  Processing templates..."
+
+# Waybar
+process_template "$ISLAND_PATH/templates/waybar-style.css.tpl" "$HOME/.config/waybar/style.css"
+
+# Rofi
+process_template "$ISLAND_PATH/templates/rofi-config.rasi.tpl" "$HOME/.config/rofi/config.rasi"
+
+# Mako
+process_template "$ISLAND_PATH/templates/mako-config.tpl" "$HOME/.config/mako/config"
+
+# GTK
+process_template "$ISLAND_PATH/templates/gtk.css.tpl" "$HOME/.config/gtk-3.0/gtk.css"
+mkdir -p "$HOME/.config/gtk-4.0"
+cp "$HOME/.config/gtk-3.0/gtk.css" "$HOME/.config/gtk-4.0/gtk.css"
+
+# Hyprlock
+process_template "$ISLAND_PATH/templates/hyprlock.conf.tpl" "$HOME/.config/hypr/hyprlock.conf"
+
+# Ghostty
+process_template "$ISLAND_PATH/templates/ghostty-config.tpl" "$HOME/.config/ghostty/config"
+
+# Tmux theme (only the theme section)
+process_template "$ISLAND_PATH/templates/tmux-theme.conf.tpl" "$HOME/.config/tmux/theme.conf"
+
+# Hyprland borders (write to a theme overlay file, sourced by appearance.lua)
+process_template "$ISLAND_PATH/templates/hyprland-appearance.lua.tpl" "$HOME/.config/hypr/theme.lua"
+
+# Starship
+process_template "$ISLAND_PATH/templates/starship.toml.tpl" "$HOME/.config/starship.toml"
+
+# Neovim — update colorscheme plugin
+NVIM_THEME="$HOME/.config/nvim/lua/plugins/island-theme.lua"
+cat > "$NVIM_THEME" << NVEOF
+return {
+  "$THEME_NVIM_PLUGIN",
+  lazy = false,
+  priority = 1000,
+  config = function()
+    vim.cmd("colorscheme $THEME_NVIM_COLORSCHEME")
+  end,
+}
+NVEOF
+
+# Save current theme name
+mkdir -p "$STATE_DIR"
+echo "$THEME" > "$STATE_DIR/current-theme"
+
+# Restart components
+echo "  Restarting components..."
+makoctl reload 2>/dev/null || true
+pkill -x waybar 2>/dev/null; sleep 0.3; waybar &>/dev/null & disown
+hyprctl reload 2>/dev/null || true
+# Tmux: source theme if running
+tmux source-file "$HOME/.config/tmux/theme.conf" 2>/dev/null || true
+
+notify-send -u low "Island" "Theme switched to $THEME"
+echo "  Done. Reopen ghostty and nvim to see terminal/editor changes."

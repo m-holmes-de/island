@@ -1,0 +1,26 @@
+#!/bin/bash
+# island:summary=Select a theme from rofi.
+
+set -eEo pipefail
+
+ISLAND_PATH="${ISLAND_PATH:-$HOME/.local/share/island}"
+CURRENT=$(cat "$HOME/.local/state/island/current-theme" 2>/dev/null || echo "none")
+
+# Build list of themes
+themes=()
+for dir in "$ISLAND_PATH"/themes/*/; do
+  [[ -d "$dir" ]] || continue
+  name=$(basename "$dir")
+  if [[ "$name" == "$CURRENT" ]]; then
+    themes+=("$name (active)")
+  else
+    themes+=("$name")
+  fi
+done
+
+selected=$(printf '%s\n' "${themes[@]}" | rofi -dmenu -p "Theme" -i) || exit 0
+
+# Strip " (active)" suffix
+selected="${selected% (active)}"
+
+"$ISLAND_PATH/bin/island-theme-set" "$selected"

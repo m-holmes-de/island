@@ -12,6 +12,7 @@ island.bind("SUPER + V", "Clipboard history", "cliphist list | rofi -dmenu | cli
 
 island.bind("SUPER + W", "Wallpaper selector", "island-wallpaper-select")
 island.bind("SUPER + SHIFT + K", "Keybindings", "island-keybindings")
+island.bind("SUPER + SHIFT + T", "Theme selector", "island-theme-select")
 
 -- === TUI Launchers ===
 island.bind("SUPER + N", "Network (impala)", island.tui("impala"))
