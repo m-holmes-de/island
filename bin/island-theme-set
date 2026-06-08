@@ -146,7 +146,9 @@ pkill -x waybar 2>/dev/null; sleep 0.3; waybar &>/dev/null & disown
 hyprctl reload 2>/dev/null || true
 # Tmux: source theme if running
 tmux source-file "$HOME/.config/tmux/theme.conf" 2>/dev/null || true
-# Thunar: quit daemon so it picks up new theme on next open
+# Thunar: restart so it picks up new theme
 thunar -q 2>/dev/null || true
+sleep 0.3
+thunar --daemon &>/dev/null & disown
 notify-send -u low "Island" "Theme switched to $THEME — reload ghostty with Ctrl+Shift+,"
 echo "  Done."
