@@ -1,0 +1,26 @@
+#!/bin/bash
+# island:summary=Install kanata config and enable the systemd service.
+
+set -eEo pipefail
+
+ISLAND_PATH="${ISLAND_PATH:-$HOME/.local/share/island}"
+
+echo "Setting up kanata (CapsLock → Escape/Hyper)..."
+
+# Copy config to /etc (kanata needs root for evdev access)
+sudo mkdir -p /etc/kanata
+sudo cp "$ISLAND_PATH/config/kanata/kanata.kbd" /etc/kanata/kanata.kbd
+echo "  Config deployed to /etc/kanata/kanata.kbd"
+
+# Install systemd service
+sudo cp "$ISLAND_PATH/config/kanata/kanata.service" /etc/systemd/system/kanata.service
+sudo systemctl daemon-reload
+sudo systemctl enable --now kanata.service
+echo "  Service enabled and started."
+
+echo ""
+echo "  CapsLock is now:"
+echo "    Tap  → Escape"
+echo "    Hold → Super+Ctrl+Alt (Hyper)"
+echo ""
+echo "  Verify: systemctl status kanata.service"
