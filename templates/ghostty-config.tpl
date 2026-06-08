@@ -1,6 +1,7 @@
 # Island Ghostty — {{THEME_NAME}}
 
 theme = {{THEME_GHOSTTY}}
+background = {{THEME_BG}}
 
 font-family = JetBrainsMono Nerd Font
 font-size = 12
