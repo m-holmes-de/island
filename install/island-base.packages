@@ -56,6 +56,7 @@ noto-fonts-emoji
 # Theming
 tela-circle-icon-theme-purple
 adw-gtk-theme
+xsettingsd
 
 # Wayland compat
 qt5-wayland

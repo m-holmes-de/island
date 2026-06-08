@@ -6,6 +6,7 @@ island.exec_on_start("mako")
 island.exec_on_start("island-wallpaper-restore")
 island.exec_on_start("hypridle")
 island.exec_on_start("/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1")
+island.exec_on_start("xsettingsd")
 
 -- Clipboard history
 island.exec_on_start("wl-paste --type text --watch cliphist store")

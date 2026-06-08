@@ -146,9 +146,16 @@ pkill -x waybar 2>/dev/null; sleep 0.3; waybar &>/dev/null & disown
 hyprctl reload 2>/dev/null || true
 # Tmux: source theme if running
 tmux source-file "$HOME/.config/tmux/theme.conf" 2>/dev/null || true
-# Thunar: restart so it picks up new theme
-thunar -q 2>/dev/null || true
-sleep 0.3
-thunar --daemon &>/dev/null & disown
+# GTK live reload via xsettingsd (broadcasts to all GTK apps including Thunar)
+if command -v xsettingsd &>/dev/null; then
+  mkdir -p "$HOME/.config/xsettingsd"
+  cat > "$HOME/.config/xsettingsd/xsettingsd.conf" << XEOF
+Net/ThemeName "adw-gtk3-dark"
+Net/IconThemeName "Tela-circle-purple-dark"
+Gtk/FontName "JetBrainsMono Nerd Font Propo 11"
+Net/CursorThemeName "Adwaita"
+XEOF
+  pkill -HUP xsettingsd 2>/dev/null || { xsettingsd &>/dev/null & disown; }
+fi
 notify-send -u low "Island" "Theme switched to $THEME — reload ghostty with Ctrl+Shift+,"
 echo "  Done."
