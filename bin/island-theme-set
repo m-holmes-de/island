@@ -131,6 +131,5 @@ pkill -x waybar 2>/dev/null; sleep 0.3; waybar &>/dev/null & disown
 hyprctl reload 2>/dev/null || true
 # Tmux: source theme if running
 tmux source-file "$HOME/.config/tmux/theme.conf" 2>/dev/null || true
-
-notify-send -u low "Island" "Theme switched to $THEME"
-echo "  Done. Reopen ghostty and nvim to see terminal/editor changes."
+notify-send -u low "Island" "Theme switched to $THEME — reload ghostty with Ctrl+Shift+,"
+echo "  Done."
