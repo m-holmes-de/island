@@ -53,6 +53,8 @@ All bindings use SUPER (Windows/Meta) as the primary modifier.
 
 | Key | Action |
 |-----|--------|
+| SUPER + - | Shrink window |
+| SUPER + = | Grow window |
 | SUPER + CTRL + H | Shrink width |
 | SUPER + CTRL + L | Grow width |
 | SUPER + CTRL + K | Shrink height |
@@ -104,6 +106,15 @@ A red 󰻂 icon appears in waybar while recording.
 
 | Key | Action |
 |-----|--------|
-| SUPER + SHIFT + K | Show keybinding viewer |
+| SUPER + SHIFT + / | Show keybinding viewer |
 | SUPER + Escape | Lock screen |
 | SUPER + SHIFT + Q | Exit Hyprland |
+
+## Known Issues
+
+- **HYPER + SHIFT + 2 does not move window to workspace 2** when using kanata
+  (CapsLock as Hyper). All other HYPER + SHIFT + number combos work. Pressing
+  the physical keys (Super+Ctrl+Alt+Shift+2) works correctly. Suspected
+  interaction between kanata's virtual modifier output, German keyboard layout
+  (`de`), and the `code:11` keycode. TODO: reproduce after reboot and debug
+  with `wev` to compare key events for HYPER+SHIFT+1 vs HYPER+SHIFT+2.

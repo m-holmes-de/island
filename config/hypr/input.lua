@@ -6,7 +6,7 @@ hl.config({
     kb_layout = "de",
     kb_variant = "",
     kb_model = "",
-    kb_options = "",
+    kb_options = "lv3:ralt_switch",
     kb_rules = "",
     follow_mouse = 1,
     sensitivity = 0,

@@ -14,7 +14,7 @@ island.bind(HYPER .. " + E", "File manager (Thunar)", "thunar")
 island.bind(HYPER .. " + Y", "File manager (yazi)", island.tui("yazi"))
 island.bind(HYPER .. " + V", "Clipboard history", "cliphist list | rofi -dmenu | cliphist decode | wl-copy")
 island.bind(HYPER .. " + W", "Wallpaper selector", "island-wallpaper-select")
-island.bind(HYPER .. " + SHIFT + K", "Keybindings", "island-keybindings")
+island.bind(HYPER .. " + SHIFT + SLASH", "Keybindings", "island-keybindings")
 island.bind(HYPER .. " + SHIFT + T", "Theme selector", "island-theme-select")
 
 -- === TUI Launchers ===
@@ -51,8 +51,8 @@ island.bind(HYPER .. " + SHIFT + UP", "Move window up", hl.dsp.window.swap({ dir
 island.bind(HYPER .. " + SHIFT + DOWN", "Move window down", hl.dsp.window.swap({ direction = "d" }))
 
 -- === Window Resize ===
-island.bind(HYPER .. " + SHIFT + S", "Shrink window", hl.dsp.window.resize({ x = -60, y = -60, relative = true }))
-island.bind(HYPER .. " + SHIFT + D", "Grow window", hl.dsp.window.resize({ x = 60, y = 60, relative = true }))
+island.bind(HYPER .. " + MINUS", "Shrink window", hl.dsp.window.resize({ x = -60, y = -60, relative = true }))
+island.bind(HYPER .. " + EQUAL", "Grow window", hl.dsp.window.resize({ x = 60, y = 60, relative = true }))
 island.bind("SUPER + CTRL + H", "Shrink width", hl.dsp.window.resize({ x = -40, y = 0, relative = true }))
 island.bind("SUPER + CTRL + L", "Grow width", hl.dsp.window.resize({ x = 40, y = 0, relative = true }))
 island.bind("SUPER + CTRL + K", "Shrink height", hl.dsp.window.resize({ x = 0, y = -40, relative = true }))
