@@ -13,6 +13,14 @@ window#waybar {
     border-radius: 10px;
 }
 
+.modules-left {
+    margin-left: 8px;
+}
+
+.modules-right {
+    margin-right: 8px;
+}
+
 /* --- Workspaces --- */
 
 #workspaces button {
