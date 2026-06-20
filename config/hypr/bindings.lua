@@ -10,8 +10,8 @@ local HYPER = "SUPER + CTRL"
 -- === Application Launchers ===
 island.bind(HYPER .. " + RETURN", "Terminal", "ghostty")
 island.bind(HYPER .. " + SPACE", "App launcher", "rofi -show drun -show-icons")
-island.bind(HYPER .. " + B", "Browser", "firefox")
-island.bind(HYPER .. " + E", "File manager (Thunar)", "thunar")
+island.bind(HYPER .. " + B", "Browser", "google-chrome-stable")
+island.bind(HYPER .. " + F", "File manager (Thunar)", "thunar")
 island.bind(HYPER .. " + Y", "File manager (yazi)", island.tui("yazi"))
 island.bind(HYPER .. " + V", "Clipboard history", "cliphist list | rofi -dmenu -theme ~/.config/rofi/dmenu.rasi | cliphist decode | wl-copy")
 island.bind(HYPER .. " + W", "Wallpaper selector", "island-wallpaper-select")
