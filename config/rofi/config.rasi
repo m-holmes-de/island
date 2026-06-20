@@ -1,59 +1,71 @@
-/* Island Rofi — Rose Pine */
+/* Island Rofi — Rosé Pine with blur/xray */
 
 configuration {
     modi: "drun,run,window";
     show-icons: true;
     icon-theme: "Adwaita";
-    font: "JetBrains Mono Nerd Font 12";
-    display-drun: "Apps";
-    display-run: "Run";
-    display-window: "Windows";
+    font: "JetBrains Mono Nerd Font 11";
+    display-drun: "";
+    display-run: "";
+    display-window: "";
     drun-display-format: "{name}";
+    hover-select: true;
+    me-select-entry: "";
+    me-accept-entry: "MousePrimary";
 }
 
 * {
-    bg: #191724dd;
-    bg-alt: #26233a;
+    bg: #19172488;
+    bg-entry: #26233aaa;
+    bg-selected: #26233add;
     fg: #e0def4;
-    accent: #31748f;
+    fg-dim: #908caa;
+    accent: #c4a7e7;
+    accent-alt: #9ccfd8;
+    rose: #ebbcba;
     urgent: #eb6f92;
-    border-radius: 8px;
 }
 
 window {
-    width: 600px;
+    width: 500px;
     background-color: @bg;
-    border: 2px solid;
-    border-color: @accent;
-    border-radius: 12px;
-    padding: 20px;
+    border: 1px solid;
+    border-color: #c4a7e733;
+    border-radius: 16px;
+    padding: 0;
+    location: center;
+    anchor: center;
+}
+
+mainbox {
+    background-color: transparent;
+    padding: 16px;
+    spacing: 12px;
 }
 
 inputbar {
-    children: [prompt, textbox-prompt-colon, entry];
-    background-color: @bg-alt;
-    border-radius: 8px;
-    padding: 8px 12px;
-    margin: 0 0 12px 0;
+    children: [textbox-prompt-icon, entry];
+    background-color: @bg-entry;
+    border: 1px solid;
+    border-color: #c4a7e722;
+    border-radius: 12px;
+    padding: 12px 16px;
 }
 
-prompt {
-    background-color: transparent;
-    text-color: @accent;
-}
-
-textbox-prompt-colon {
+textbox-prompt-icon {
     expand: false;
-    str: " > ";
+    str: " ";
     text-color: @accent;
     background-color: transparent;
+    padding: 0 8px 0 0;
 }
 
 entry {
     background-color: transparent;
     text-color: @fg;
     placeholder: "Search...";
-    placeholder-color: #6e6a86;
+    placeholder-color: @fg-dim;
+    cursor-color: @accent;
 }
 
 listview {
@@ -62,27 +74,58 @@ listview {
     scrollbar: false;
     background-color: transparent;
     spacing: 4px;
+    fixed-height: false;
 }
 
 element {
-    padding: 8px 12px;
+    padding: 10px 14px;
     background-color: transparent;
     text-color: @fg;
-    border-radius: 6px;
+    border-radius: 10px;
 }
 
-element selected {
-    background-color: @bg-alt;
+element normal.normal,
+element alternate.normal {
+    background-color: transparent;
+    text-color: @fg;
+}
+
+element selected.normal {
+    background-color: @bg-selected;
     text-color: @accent;
 }
 
+element normal.urgent,
+element alternate.urgent,
+element selected.urgent {
+    background-color: transparent;
+    text-color: @urgent;
+}
+
+element normal.active,
+element alternate.active,
+element selected.active {
+    background-color: transparent;
+    text-color: @accent-alt;
+}
+
 element-icon {
-    size: 24px;
-    margin: 0 8px 0 0;
+    size: 22px;
+    margin: 0 10px 0 0;
     background-color: transparent;
 }
 
 element-text {
     background-color: transparent;
     text-color: inherit;
+    vertical-align: 0.5;
+}
+
+message {
+    background-color: transparent;
+}
+
+textbox {
+    background-color: transparent;
+    text-color: @fg-dim;
 }

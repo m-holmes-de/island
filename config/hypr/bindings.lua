@@ -1,10 +1,11 @@
 -- Island Keybindings
 -- https://wiki.hyprland.org/Configuring/Binds/
 --
--- HYPER = CapsLock (hold) = Super+Ctrl+Alt (via kanata)
+-- HYPER = CapsLock (hold) = Super+Ctrl (via kanata)
 -- SUPER = Windows/Meta key (fallback when kanata not running)
+-- NOTE: Alt removed from Hyper to avoid Ctrl+Alt = AltGr conflict on German layout
 
-local HYPER = "SUPER + CTRL + ALT"
+local HYPER = "SUPER + CTRL"
 
 -- === Application Launchers ===
 island.bind(HYPER .. " + RETURN", "Terminal", "ghostty")
@@ -14,19 +15,18 @@ island.bind(HYPER .. " + E", "File manager (Thunar)", "thunar")
 island.bind(HYPER .. " + Y", "File manager (yazi)", island.tui("yazi"))
 island.bind(HYPER .. " + V", "Clipboard history", "cliphist list | rofi -dmenu | cliphist decode | wl-copy")
 island.bind(HYPER .. " + W", "Wallpaper selector", "island-wallpaper-select")
-island.bind(HYPER .. " + SHIFT + SLASH", "Keybindings", "island-keybindings")
+island.bind(HYPER .. " + I", "Keybindings", "island-keybindings")
 island.bind(HYPER .. " + SHIFT + T", "Theme selector", "island-theme-select")
 
 -- === TUI Launchers ===
 island.bind(HYPER .. " + N", "Network (impala)", island.tui("impala"))
 island.bind(HYPER .. " + O", "Bluetooth (bluetui)", island.tui("bluetui"))
 island.bind(HYPER .. " + A", "Audio (pulsemixer)", island.tui("pulsemixer"))
-island.bind(HYPER .. " + M", "System monitor (btop)", island.tui("btop"))
+island.bind(HYPER .. " + X", "System monitor (btop)", island.tui("btop"))
 
 -- === Window Management ===
 island.bind(HYPER .. " + Q", "Close window", hl.dsp.window.close())
-island.bind(HYPER .. " + F", "Fullscreen", hl.dsp.window.fullscreen({ mode = "fullscreen" }))
-island.bind(HYPER .. " + SHIFT + F", "Maximized", hl.dsp.window.fullscreen({ mode = "maximized" }))
+island.bind(HYPER .. " + M", "Maximize", hl.dsp.window.fullscreen({ mode = "maximized" }))
 island.bind(HYPER .. " + T", "Toggle floating", hl.dsp.window.float({ action = "toggle" }))
 island.bind(HYPER .. " + P", "Pseudo tile", hl.dsp.window.pseudo())
 island.bind(HYPER .. " + J", "Toggle split", hl.dsp.layout("togglesplit"))
@@ -53,14 +53,16 @@ island.bind(HYPER .. " + SHIFT + DOWN", "Move window down", hl.dsp.window.swap({
 -- === Window Resize ===
 island.bind(HYPER .. " + MINUS", "Shrink window", hl.dsp.window.resize({ x = -60, y = -60, relative = true }))
 island.bind(HYPER .. " + EQUAL", "Grow window", hl.dsp.window.resize({ x = 60, y = 60, relative = true }))
-island.bind("SUPER + CTRL + H", "Shrink width", hl.dsp.window.resize({ x = -40, y = 0, relative = true }))
-island.bind("SUPER + CTRL + L", "Grow width", hl.dsp.window.resize({ x = 40, y = 0, relative = true }))
-island.bind("SUPER + CTRL + K", "Shrink height", hl.dsp.window.resize({ x = 0, y = -40, relative = true }))
-island.bind("SUPER + CTRL + J", "Grow height", hl.dsp.window.resize({ x = 0, y = 40, relative = true }))
+island.bind(HYPER .. " + ALT + H", "Shrink width", hl.dsp.window.resize({ x = -40, y = 0, relative = true }))
+island.bind(HYPER .. " + ALT + L", "Grow width", hl.dsp.window.resize({ x = 40, y = 0, relative = true }))
+island.bind(HYPER .. " + ALT + K", "Shrink height", hl.dsp.window.resize({ x = 0, y = -40, relative = true }))
+island.bind(HYPER .. " + ALT + J", "Grow height", hl.dsp.window.resize({ x = 0, y = 40, relative = true }))
 
 -- === Workspaces ===
+-- Use keysym names to avoid German layout issues with code: + SHIFT
+local ws_keys = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "0" }
 for workspace = 1, 10 do
-  local key = "code:" .. tostring(workspace + 9)
+  local key = ws_keys[workspace]
   island.bind(HYPER .. " + " .. key, "Workspace " .. workspace, hl.dsp.focus({ workspace = tostring(workspace) }))
   island.bind(HYPER .. " + SHIFT + " .. key, "Move to workspace " .. workspace, hl.dsp.window.move({ workspace = tostring(workspace) }))
 end

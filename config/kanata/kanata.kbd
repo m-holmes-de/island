@@ -1,7 +1,7 @@
 ;; Island Kanata — CapsLock as Escape (tap) / Hyper (hold)
 ;;
 ;; Tap CapsLock quickly → Escape
-;; Hold CapsLock + another key → Super+Ctrl+Alt (Hyper)
+;; Hold CapsLock + another key → Super+Ctrl (Hyper)
 ;; All other keys pass through unchanged.
 
 (defcfg
@@ -17,5 +17,5 @@
 )
 
 (defalias
-  hyper (tap-hold 200 200 esc (multi lmet lctl lalt))
+  hyper (tap-hold 200 200 esc (multi lmet lctl))
 )
