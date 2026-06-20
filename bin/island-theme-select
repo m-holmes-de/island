@@ -22,7 +22,7 @@ for dir in "$ISLAND_PATH"/themes/*/; do
   done
 done
 
-selected=$(printf '%s\n' "${themes[@]}" | rofi -dmenu -p "Theme" -i) || exit 0
+selected=$(printf '%s\n' "${themes[@]}" | rofi -dmenu -p "Theme" -i -theme "$HOME/.config/rofi/dmenu.rasi") || exit 0
 
 # Strip active marker
 selected="${selected%  ●}"

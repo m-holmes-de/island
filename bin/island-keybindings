@@ -31,7 +31,5 @@ fi
     fi
   done < "$BINDINGS_FILE"
 } | rofi -dmenu -p "Keybindings" -i \
-    -theme-str 'listview { lines: 20; }' \
-    -theme-str 'window { width: 700px; }' \
-    -theme-str 'element { font: "JetBrains Mono Nerd Font 12"; }' \
+    -theme "$HOME/.config/rofi/dmenu.rasi" \
     || true

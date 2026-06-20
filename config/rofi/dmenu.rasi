@@ -1,17 +1,7 @@
-/* Island Rofi — Rosé Pine icon grid with blur/xray */
+/* Island Rofi dmenu — Rosé Pine list style for text menus */
 
 configuration {
-    modi: "drun,run,window";
-    show-icons: true;
-    icon-theme: "Adwaita";
-    font: "JetBrains Mono Nerd Font 11";
-    display-drun: "";
-    display-run: "";
-    display-window: "";
-    drun-display-format: "{name}";
-    hover-select: true;
-    me-select-entry: "";
-    me-accept-entry: "MousePrimary";
+    show-icons: false;
 }
 
 * {
@@ -21,13 +11,11 @@ configuration {
     fg: #e0def4;
     fg-dim: #908caa;
     accent: #c4a7e7;
-    accent-alt: #9ccfd8;
-    rose: #ebbcba;
     urgent: #eb6f92;
 }
 
 window {
-    width: 820px;
+    width: 700px;
     background-color: @bg;
     border: 1px solid;
     border-color: #c4a7e733;
@@ -40,8 +28,8 @@ window {
 
 mainbox {
     background-color: transparent;
-    padding: 20px;
-    spacing: 16px;
+    padding: 16px;
+    spacing: 12px;
 }
 
 inputbar {
@@ -64,26 +52,25 @@ textbox-prompt-icon {
 entry {
     background-color: transparent;
     text-color: @fg;
-    placeholder: "Search...";
+    placeholder: "Filter...";
     placeholder-color: @fg-dim;
     cursor-color: @accent;
 }
 
 listview {
-    columns: 6;
-    lines: 4;
+    columns: 1;
+    lines: 20;
     scrollbar: false;
     background-color: transparent;
-    spacing: 8px;
+    spacing: 2px;
     fixed-height: false;
 }
 
 element {
-    orientation: vertical;
-    padding: 14px 8px;
+    padding: 6px 14px;
     background-color: transparent;
     text-color: @fg;
-    border-radius: 12px;
+    border-radius: 8px;
 }
 
 element normal.normal,
@@ -97,32 +84,16 @@ element selected.normal {
     text-color: @accent;
 }
 
-element normal.urgent,
-element alternate.urgent,
-element selected.urgent {
-    background-color: transparent;
-    text-color: @urgent;
-}
-
-element normal.active,
-element alternate.active,
-element selected.active {
-    background-color: transparent;
-    text-color: @accent-alt;
-}
-
 element-icon {
-    size: 56px;
-    horizontal-align: 0.5;
     background-color: transparent;
-    margin: 0 0 8px 0;
+    size: 24px;
+    margin: 0 8px 0 0;
 }
 
 element-text {
     background-color: transparent;
     text-color: inherit;
-    horizontal-align: 0.5;
-    font: "JetBrains Mono Nerd Font 9";
+    font: "JetBrains Mono Nerd Font 11";
 }
 
 message {

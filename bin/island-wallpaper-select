@@ -40,6 +40,7 @@ while true; do
 
   # Show rofi with icons
   selected=$(echo -en "$rofi_input" | rofi -dmenu -p "Wallpaper" -i -show-icons \
+    -theme "$HOME/.config/rofi/dmenu.rasi" \
     -theme-str 'element-icon { size: 64px; }' \
     -theme-str 'listview { lines: 6; }' \
     -theme-str 'element { padding: 8px; }') || exit 0
