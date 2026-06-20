@@ -2,7 +2,7 @@
 
 island.exec_on_start("waybar")
 island.exec_on_start("mako")
--- Wallpaper (swaybg) — restore last wallpaper or use default
+-- Wallpaper (awww) — restore last wallpaper or use default
 island.exec_on_start("island-wallpaper-restore")
 island.exec_on_start("hypridle")
 island.exec_on_start("/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1")

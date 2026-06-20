@@ -1,13 +1,26 @@
 #!/bin/bash
-# island:summary=Browse ~/wallpapers/ with rofi and set the selected wallpaper.
+# island:summary=Browse theme wallpapers with rofi and set the selected wallpaper.
 
 set -eEo pipefail
 
 ISLAND_PATH="${ISLAND_PATH:-$HOME/.local/share/island}"
-WALLPAPER_DIR="${1:-$HOME/wallpapers}"
+STATE_DIR="$HOME/.local/state/island"
+
+# Determine wallpaper directory from current theme
+if [[ -n "$1" ]]; then
+  WALLPAPER_DIR="$1"
+else
+  CURRENT_THEME=$(cat "$STATE_DIR/current-theme" 2>/dev/null || echo "")
+  THEME_NAME="${CURRENT_THEME%%:*}"
+  if [[ -n "$THEME_NAME" && -d "$ISLAND_PATH/themes/$THEME_NAME/wallpapers" ]]; then
+    WALLPAPER_DIR="$ISLAND_PATH/themes/$THEME_NAME/wallpapers"
+  else
+    WALLPAPER_DIR="$HOME/wallpapers"
+  fi
+fi
 
 if [[ ! -d "$WALLPAPER_DIR" ]]; then
-  notify-send -u normal "Wallpaper" "Directory not found: $WALLPAPER_DIR"
+  notify-send -u normal "Wallpaper" "No wallpapers found for current theme"
   exit 1
 fi
 
@@ -16,7 +29,8 @@ while true; do
   rofi_input=""
 
   # Add parent navigation if we're in a subfolder
-  if [[ "$WALLPAPER_DIR" != "$HOME/wallpapers" ]]; then
+  base_dir="$ISLAND_PATH/themes/${THEME_NAME:-_}/wallpapers"
+  if [[ "$WALLPAPER_DIR" != "$base_dir" && "$WALLPAPER_DIR" != "$HOME/wallpapers" ]]; then
     rofi_input+=$'..\0icon\x1ffolder\n'
   fi
 
@@ -34,7 +48,7 @@ while true; do
     \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' -o -iname '*.webp' -o -iname '*.bmp' \) 2>/dev/null | sort)
 
   if [[ -z "$rofi_input" ]]; then
-    notify-send -u normal "Wallpaper" "No images found in $WALLPAPER_DIR"
+    notify-send -u normal "Wallpaper" "No wallpapers found for current theme"
     exit 1
   fi
 

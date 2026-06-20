@@ -25,9 +25,17 @@ echo "$WALLPAPER" > "$STATE_DIR/current-wallpaper"
 # Symlink for easy reference
 ln -nsf "$WALLPAPER" "$STATE_DIR/current-wallpaper-link"
 
-# Update desktop background (swaybg)
-pkill -x swaybg 2>/dev/null || true
-setsid swaybg -i "$WALLPAPER" -m fill >/dev/null 2>&1 &
+# Update desktop background (awww with fade transition)
+# Ensure awww daemon is running
+awww query &>/dev/null || awww-daemon &>/dev/null & disown
+sleep 0.1
+
+awww img "$WALLPAPER" \
+  --transition-type grow \
+  --transition-pos center \
+  --transition-duration 3 \
+  --transition-step 90 \
+  --transition-fps 60
 
 # Update lock screen (hyprlock) — set the path in hyprlock.conf
 HYPRLOCK="$HOME/.config/hypr/hyprlock.conf"

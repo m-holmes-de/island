@@ -3,13 +3,17 @@
 
 STATE_FILE="$HOME/.local/state/island/current-wallpaper"
 
+# Start awww daemon
+awww-daemon &>/dev/null & disown
+sleep 0.3
+
 if [[ -f "$STATE_FILE" ]]; then
   WALLPAPER="$(cat "$STATE_FILE")"
   if [[ -f "$WALLPAPER" ]]; then
-    setsid swaybg -i "$WALLPAPER" -m fill >/dev/null 2>&1 &
+    awww img "$WALLPAPER" --transition-type none
     exit 0
   fi
 fi
 
-# No saved wallpaper — start swaybg with a solid color fallback
-setsid swaybg -c '#191724' >/dev/null 2>&1 &
+# No saved wallpaper — set a solid color fallback
+awww clear 191724

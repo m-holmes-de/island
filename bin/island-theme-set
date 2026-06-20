@@ -162,5 +162,17 @@ Net/CursorThemeName "Adwaita"
 XEOF
   pkill -HUP xsettingsd 2>/dev/null || { xsettingsd &>/dev/null & disown; }
 fi
+# Set first theme wallpaper if available
+THEME_WALLS="$ISLAND_PATH/themes/$THEME/wallpapers"
+if [[ -d "$THEME_WALLS" ]]; then
+  first_wall=$(find "$THEME_WALLS" -maxdepth 1 -type f \
+    \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' -o -iname '*.webp' -o -iname '*.bmp' \) \
+    2>/dev/null | sort | head -1)
+  if [[ -n "$first_wall" ]]; then
+    "$ISLAND_PATH/bin/island-wallpaper-set" "$first_wall"
+    echo "  Set wallpaper: $(basename "$first_wall")"
+  fi
+fi
+
 notify-send -u low "Island" "Theme switched to $THEME — reload ghostty with Ctrl+Shift+,"
 echo "  Done."
