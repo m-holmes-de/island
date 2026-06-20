@@ -67,7 +67,7 @@ window#waybar {
 }
 
 #clock {
-    color: {{THEME_FG}};
+    color: {{THEME_FG_DIM}};
 }
 
 /* --- System monitors (bordered group) --- */
