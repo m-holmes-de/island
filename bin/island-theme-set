@@ -94,6 +94,7 @@ process_template "$ISLAND_PATH/templates/waybar-style.css.tpl" "$HOME/.config/wa
 
 # Rofi
 process_template "$ISLAND_PATH/templates/rofi-config.rasi.tpl" "$HOME/.config/rofi/config.rasi"
+process_template "$ISLAND_PATH/templates/rofi-dmenu.rasi.tpl" "$HOME/.config/rofi/dmenu.rasi"
 
 # Mako
 process_template "$ISLAND_PATH/templates/mako-config.tpl" "$HOME/.config/mako/config"

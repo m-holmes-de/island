@@ -23,10 +23,14 @@ fi
     fi
 
     # Parse island.bind lines with a description (not nil)
-    if [[ "$line" =~ island\.bind\(\"([^\"]+)\",\ \"([^\"]+)\" ]]; then
+    # Handles both: island.bind("KEYS", "Desc" and island.bind(HYPER .. " + X", "Desc"
+    if [[ "$line" =~ island\.bind\(HYPER\ \.\.\ \"\ \+\ ([^\"]+)\",\ \"([^\"]+)\" ]]; then
+      keys="HYPER + ${BASH_REMATCH[1]}"
+      desc="${BASH_REMATCH[2]}"
+      printf "%-28s  %s\n" "$keys" "$desc"
+    elif [[ "$line" =~ island\.bind\(\"([^\"]+)\",\ \"([^\"]+)\" ]]; then
       keys="${BASH_REMATCH[1]}"
       desc="${BASH_REMATCH[2]}"
-      # Format: pad keys to fixed width for alignment
       printf "%-28s  %s\n" "$keys" "$desc"
     fi
   done < "$BINDINGS_FILE"
