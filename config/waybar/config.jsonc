@@ -20,11 +20,11 @@
         "memory",
         "disk",
         "custom/uptime",
+        "battery",
         "tray",
         "pulseaudio",
         "network",
-        "bluetooth",
-        "battery"
+        "bluetooth"
     ],
 
     "hyprland/workspaces": {

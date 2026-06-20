@@ -52,10 +52,8 @@ window#waybar {
 #pulseaudio,
 #network,
 #bluetooth,
-#battery,
 #tray,
-#custom-recording,
-#custom-uptime {
+#custom-recording {
     padding: 0 8px;
     margin: 4px 1px;
 }
@@ -69,7 +67,8 @@ window#waybar {
 #cpu,
 #memory,
 #disk,
-#custom-uptime {
+#custom-uptime,
+#battery {
     padding: 0 8px;
     margin: 4px 0;
     font-size: 11px;
@@ -95,6 +94,11 @@ window#waybar {
 }
 
 #custom-uptime {
+    border-top: 1px solid {{THEME_BG_HIGHLIGHT}};
+    border-bottom: 1px solid {{THEME_BG_HIGHLIGHT}};
+}
+
+#battery {
     border: 1px solid {{THEME_BG_HIGHLIGHT}};
     border-radius: 0 8px 8px 0;
     border-left: none;
