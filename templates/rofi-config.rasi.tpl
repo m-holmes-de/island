@@ -30,7 +30,7 @@ window {
     background-color: @bg;
     border: 1px solid;
     border-color: {{THEME_ACCENT}}33;
-    border-radius: 0 0 16px 16px;
+    border-radius: 16px;
     padding: 0;
     location: north;
     anchor: north;

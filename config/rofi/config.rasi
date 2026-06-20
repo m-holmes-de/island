@@ -31,7 +31,7 @@ window {
     background-color: @bg;
     border: 1px solid;
     border-color: #c4a7e733;
-    border-radius: 0 0 16px 16px;
+    border-radius: 16px;
     padding: 0;
     location: north;
     anchor: north;
