@@ -10,11 +10,12 @@ Screenshots via `island-capture-screenshot` (grim + slurp + satty).
 Recording via `island-capture-recording` (wf-recorder) with waybar indicator.
 
 ### ~~Keybinding Viewer~~ — Done
-Rofi-based viewer parsing bindings.lua. SUPER+/ to open.
+Rofi-based viewer parsing bindings.lua. HYPER+I to open.
 
 ### ~~Theme Management~~ — Done
-Template-based theming across all apps (SUPER+SHIFT+T). Rose Pine Moon and One Dark Pro,
+Template-based theming across all apps (HYPER+SHIFT+T). Rose Pine Moon and One Dark Pro,
 with --dark variant for black backgrounds. Uses `island-theme-set` and `island-theme-select`.
+Templates generate both rofi grid (app launcher) and dmenu list (keybindings, clipboard, etc.) themes.
 
 ### ~~Neovim Configuration~~ — Done
 LazyVim-based with Rose Pine main variant. Config in `config/nvim/`.
