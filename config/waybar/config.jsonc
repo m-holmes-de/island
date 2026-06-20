@@ -8,13 +8,18 @@
     "spacing": 0,
 
     "modules-left": [
-        "hyprland/workspaces"
+        "hyprland/workspaces",
+        "hyprland/window"
     ],
     "modules-center": [
         "clock",
         "custom/recording"
     ],
     "modules-right": [
+        "cpu",
+        "memory",
+        "disk",
+        "custom/uptime",
         "tray",
         "pulseaudio",
         "network",
@@ -85,6 +90,51 @@
         "format-charging": "󰂄 {capacity}%",
         "format-plugged": "󰚥 {capacity}%",
         "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
+    },
+
+    "hyprland/window": {
+        "format": "{title}",
+        "max-length": 40,
+        "separate-outputs": true
+    },
+
+    "cpu": {
+        "format": "󰍛 {usage}%",
+        "interval": 3,
+        "tooltip-format": "CPU: {usage}%\n{avg_frequency} GHz",
+        "states": {
+            "high": 70,
+            "critical": 90
+        },
+        "on-click": "ghostty --title='Island TUI' -e btop"
+    },
+
+    "memory": {
+        "format": "󰘚 {percentage}%",
+        "interval": 5,
+        "tooltip-format": "RAM: {used:0.1f}G / {total:0.1f}G\nSwap: {swapUsed:0.1f}G / {swapTotal:0.1f}G",
+        "states": {
+            "high": 70,
+            "critical": 90
+        },
+        "on-click": "ghostty --title='Island TUI' -e btop"
+    },
+
+    "disk": {
+        "format": "󰋊 {percentage_used}%",
+        "interval": 30,
+        "path": "/",
+        "tooltip-format": "Disk: {used} / {total} ({percentage_used}%)\n{path}",
+        "states": {
+            "high": 80,
+            "critical": 95
+        }
+    },
+
+    "custom/uptime": {
+        "exec": "awk '{d=int($1/86400); h=int($1%86400/3600); m=int($1%3600/60); if(d>0) printf \"󰔟 %dd %dh\", d, h; else printf \"󰔟 %dh %dm\", h, m}' /proc/uptime",
+        "interval": 60,
+        "tooltip": false
     },
 
     "tray": {

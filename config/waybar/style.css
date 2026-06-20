@@ -37,6 +37,15 @@ window#waybar {
     color: #e0def4;
 }
 
+/* --- Window title --- */
+
+#window {
+    padding: 0 12px;
+    margin: 4px 1px;
+    color: #6e6a86;
+    font-size: 11px;
+}
+
 /* --- Modules --- */
 
 #clock,
@@ -45,13 +54,67 @@ window#waybar {
 #bluetooth,
 #battery,
 #tray,
-#custom-recording {
+#custom-recording,
+#custom-uptime {
     padding: 0 8px;
     margin: 4px 1px;
 }
 
 #clock {
     color: #e0def4;
+}
+
+/* --- System monitors (bordered group) --- */
+
+#cpu,
+#memory,
+#disk,
+#custom-uptime {
+    padding: 0 8px;
+    margin: 4px 0;
+    font-size: 11px;
+    color: #908caa;
+}
+
+#cpu {
+    border: 1px solid #26233a;
+    border-radius: 8px 0 0 8px;
+    border-right: none;
+    margin-left: 4px;
+    padding-left: 10px;
+}
+
+#memory {
+    border-top: 1px solid #26233a;
+    border-bottom: 1px solid #26233a;
+}
+
+#disk {
+    border-top: 1px solid #26233a;
+    border-bottom: 1px solid #26233a;
+}
+
+#custom-uptime {
+    border: 1px solid #26233a;
+    border-radius: 0 8px 8px 0;
+    border-left: none;
+    margin-right: 4px;
+    padding-right: 10px;
+}
+
+#cpu.high,
+#memory.high {
+    color: #f6c177;
+}
+
+#cpu.critical,
+#memory.critical,
+#disk.critical {
+    color: #eb6f92;
+}
+
+#disk.high {
+    color: #f6c177;
 }
 
 #battery.warning {
