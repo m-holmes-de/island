@@ -16,6 +16,7 @@ island.bind(HYPER .. " + Y", "File manager (yazi)", island.tui("yazi"))
 island.bind(HYPER .. " + V", "Clipboard history", "cliphist list | rofi -dmenu -theme ~/.config/rofi/dmenu.rasi | cliphist decode | wl-copy")
 island.bind(HYPER .. " + W", "Wallpaper selector", "island-wallpaper-select")
 island.bind(HYPER .. " + I", "Keybindings", "island-keybindings")
+island.bind(HYPER .. " + D", "System menu", "island-system-menu")
 island.bind(HYPER .. " + SHIFT + T", "Theme selector", "island-theme-select")
 
 -- === TUI Launchers ===
@@ -106,7 +107,7 @@ island.bind("XF86AudioNext", nil, "playerctl next", { locked = true })
 island.bind("XF86AudioPrev", nil, "playerctl previous", { locked = true })
 
 -- === System ===
-island.bind(HYPER .. " + ESCAPE", "Lock screen", "hyprlock")
+island.bind("SUPER + ESCAPE", "Power menu", "wlogout -b 3 -c 20 -r 20 -m 300 --protocol layer-shell")
 island.bind(HYPER .. " + SHIFT + Q", "Exit Hyprland", hl.dsp.exec_cmd("hyprctl dispatch exit"))
 island.bind(HYPER .. " + SHIFT + R", "Toggle waybar", "island-toggle-waybar")
 island.bind(HYPER .. " + SHIFT + W", "Reload Hyprland config", hl.dsp.exec_cmd("hyprctl reload"))

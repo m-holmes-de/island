@@ -2,6 +2,7 @@
 ;;
 ;; Tap CapsLock quickly → Escape
 ;; Hold CapsLock + another key → Super+Ctrl (Hyper)
+;; Left Alt acts as Ctrl, Left Ctrl acts as Alt
 ;; All other keys pass through unchanged.
 
 (defcfg
@@ -9,11 +10,11 @@
 )
 
 (defsrc
-  caps
+  caps lalt lctl
 )
 
 (deflayer default
-  @hyper
+  @hyper lctl lalt
 )
 
 (defalias

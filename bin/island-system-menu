@@ -1,0 +1,31 @@
+#!/bin/bash
+# island:summary=Show system menu in rofi.
+
+set -eEo pipefail
+
+ISLAND_PATH="${ISLAND_PATH:-$HOME/.local/share/island}"
+
+ITEMS=(
+  "󰏘  Theme selector"
+  "󰸉  Wallpaper selector"
+  "󰌌  Keybindings"
+  "󰄀  Screenshot (region)"
+  "󰕧  Toggle recording"
+  "󰅐  Toggle waybar"
+  "󰌌  Setup kanata"
+  "󰁪  Run migrations"
+)
+
+selected=$(printf '%s\n' "${ITEMS[@]}" | rofi -dmenu -p "System" -i \
+  -theme "$HOME/.config/rofi/dmenu.rasi") || exit 0
+
+case "$selected" in
+  *"Theme selector"*)       "$ISLAND_PATH/bin/island-theme-select" ;;
+  *"Wallpaper selector"*)   "$ISLAND_PATH/bin/island-wallpaper-select" ;;
+  *"Keybindings"*)          "$ISLAND_PATH/bin/island-keybindings" ;;
+  *"Screenshot"*)           "$ISLAND_PATH/bin/island-capture-screenshot" region ;;
+  *"Toggle recording"*)     "$ISLAND_PATH/bin/island-capture-recording" region ;;
+  *"Toggle waybar"*)        "$ISLAND_PATH/bin/island-toggle-waybar" ;;
+  *"Setup kanata"*)         ghostty --title='Island TUI' -e "$ISLAND_PATH/bin/island-setup-kanata" ;;
+  *"Run migrations"*)       ghostty --title='Island TUI' -e "$ISLAND_PATH/bin/island-migrate" ;;
+esac

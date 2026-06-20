@@ -96,6 +96,10 @@ process_template "$ISLAND_PATH/templates/waybar-style.css.tpl" "$HOME/.config/wa
 process_template "$ISLAND_PATH/templates/rofi-config.rasi.tpl" "$HOME/.config/rofi/config.rasi"
 process_template "$ISLAND_PATH/templates/rofi-dmenu.rasi.tpl" "$HOME/.config/rofi/dmenu.rasi"
 
+# wlogout
+mkdir -p "$HOME/.config/wlogout"
+process_template "$ISLAND_PATH/templates/wlogout-style.css.tpl" "$HOME/.config/wlogout/style.css"
+
 # Mako
 process_template "$ISLAND_PATH/templates/mako-config.tpl" "$HOME/.config/mako/config"
 
