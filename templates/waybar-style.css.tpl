@@ -129,6 +129,16 @@ window#waybar {
     color: {{THEME_ERROR}};
 }
 
+/* --- Tray (desaturate app icons) --- */
+
+#tray {
+    opacity: 0.6;
+}
+
+#tray > .passive {
+    opacity: 0.4;
+}
+
 /* --- Recording indicator --- */
 
 #custom-recording.active {

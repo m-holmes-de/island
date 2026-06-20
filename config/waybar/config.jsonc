@@ -21,7 +21,6 @@
         "disk",
         "custom/uptime",
         "battery",
-        "tray",
         "pulseaudio",
         "network",
         "bluetooth"
@@ -93,8 +92,8 @@
     },
 
     "hyprland/window": {
-        "format": "{title}",
-        "max-length": 40,
+        "format": "{class}",
+        "max-length": 30,
         "separate-outputs": true
     },
 

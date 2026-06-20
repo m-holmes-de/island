@@ -129,6 +129,9 @@ window#waybar {
     color: #eb6f92;
 }
 
+/* --- Tray (desaturate app icons) --- */
+
+
 /* --- Recording indicator --- */
 
 #custom-recording.active {
