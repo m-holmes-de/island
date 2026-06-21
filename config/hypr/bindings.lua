@@ -76,6 +76,9 @@ island.bind(HYPER .. " + SHIFT + TAB", "Previous workspace", hl.dsp.focus({ work
 island.bind(HYPER .. " + S", "Toggle scratchpad", hl.dsp.workspace.toggle_special("scratchpad"))
 island.bind(HYPER .. " + SHIFT + S", "Move to scratchpad", hl.dsp.window.move({ workspace = "special:scratchpad", follow = false }))
 
+-- === Touchpad Gestures ===
+hl.gesture({ fingers = 4, direction = "horizontal", action = "workspace" })
+
 -- === Mouse Bindings ===
 island.bind("SUPER + mouse_down", "Scroll workspace forward", hl.dsp.focus({ workspace = "e+1" }))
 island.bind("SUPER + mouse_up", "Scroll workspace backward", hl.dsp.focus({ workspace = "e-1" }))
