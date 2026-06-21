@@ -27,8 +27,10 @@ ln -nsf "$WALLPAPER" "$STATE_DIR/current-wallpaper-link"
 
 # Update desktop background (awww with fade transition)
 # Ensure awww daemon is running
-awww query &>/dev/null || awww-daemon &>/dev/null & disown
-sleep 0.1
+if ! awww query &>/dev/null; then
+  awww-daemon &>/dev/null & disown
+  sleep 0.3
+fi
 
 awww img "$WALLPAPER" \
   --transition-type grow \
@@ -41,11 +43,12 @@ awww img "$WALLPAPER" \
 HYPRLOCK="$HOME/.config/hypr/hyprlock.conf"
 if [[ -f "$HYPRLOCK" ]]; then
   # Remove existing path line if present, add new one
+  WALL_ESCAPED="${WALLPAPER//\\/\\\\}"
+  WALL_ESCAPED="${WALL_ESCAPED//&/\\&}"
   if grep -q '^    path' "$HYPRLOCK"; then
-    sed -i "s|^    path.*|    path = $WALLPAPER|" "$HYPRLOCK"
+    sed -i "s|^    path.*|    path = $WALL_ESCAPED|" "$HYPRLOCK"
   else
-    # Add path after the first "background {" block's monitor line
-    sed -i "/^background {/,/^}/ { /^    monitor/a\\    path = $WALLPAPER
+    sed -i "/^background {/,/^}/ { /^    monitor/a\\    path = $WALL_ESCAPED
     }" "$HYPRLOCK"
   fi
 fi

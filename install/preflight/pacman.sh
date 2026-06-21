@@ -1,6 +1,6 @@
 # Refresh package databases and ensure yay is available
-echo "Refreshing package databases..."
-sudo pacman -Sy --noconfirm
+echo "Refreshing package databases and upgrading system..."
+sudo pacman -Syu --noconfirm
 
 if ! command -v yay &>/dev/null; then
   echo "Installing yay (AUR helper)..."

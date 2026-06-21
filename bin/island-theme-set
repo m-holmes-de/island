@@ -19,6 +19,12 @@ if [[ -z "$1" ]]; then
 fi
 
 THEME="$1"
+
+if [[ "$THEME" == */* || "$THEME" == *..* ]]; then
+  echo "Error: Invalid theme name '$THEME'" >&2
+  exit 1
+fi
+
 THEME_DIR="$ISLAND_PATH/themes/$THEME"
 
 if [[ ! -d "$THEME_DIR" ]]; then

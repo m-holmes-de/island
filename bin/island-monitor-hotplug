@@ -1,6 +1,8 @@
 #!/bin/bash
 # island:summary=Handle monitor hotplug: disable laptop when external connected.
 
+set -eEo pipefail
+
 ISLAND_PATH="${ISLAND_PATH:-$HOME/.local/share/island}"
 
 apply_wallpaper() {
@@ -26,7 +28,7 @@ handle_event() {
       local mon="${event#*>>}"
       if [[ "$mon" != "eDP-1" ]]; then
         sleep 0.5
-        hyprctl keyword monitor "eDP-1,3456x2160@60,0x0,2"
+        hyprctl keyword monitor "eDP-1,preferred,auto,2"
         sleep 0.3
         apply_wallpaper
       fi

@@ -1,6 +1,8 @@
 #!/bin/bash
 # island:summary=Restore the last set wallpaper on session start.
 
+set -eEo pipefail
+
 STATE_FILE="$HOME/.local/state/island/current-wallpaper"
 
 # Start awww daemon

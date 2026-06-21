@@ -37,7 +37,7 @@ case "$selected" in
         notify-send -u normal "Island" "Cannot disable — no external display connected"
       fi
     else
-      hyprctl eval 'hl.monitor({ output = "eDP-1", mode = "3456x2160@60", position = "0x0", scale = "2" })'
+      hyprctl eval 'hl.monitor({ output = "eDP-1", mode = "preferred", position = "auto", scale = "2" })'
       notify-send -u low "Island" "Internal display enabled"
     fi
     ;;
