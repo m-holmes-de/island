@@ -8,6 +8,7 @@ island.exec_on_start("hypridle")
 island.exec_on_start("/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1")
 island.exec_on_start("xsettingsd")
 
+
 -- Clipboard history
 island.exec_on_start("wl-paste --type text --watch cliphist store")
 island.exec_on_start("wl-paste --type image --watch cliphist store")

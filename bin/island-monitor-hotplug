@@ -1,0 +1,39 @@
+#!/bin/bash
+# island:summary=Handle monitor hotplug: disable laptop when external connected.
+
+ISLAND_PATH="${ISLAND_PATH:-$HOME/.local/share/island}"
+
+apply_wallpaper() {
+  local wall
+  wall=$(cat "$HOME/.local/state/island/current-wallpaper" 2>/dev/null)
+  [[ -n "$wall" && -f "$wall" ]] && awww img "$wall" --transition-type none
+}
+
+handle_event() {
+  local event="$1"
+  case "$event" in
+    monitoraddedv2*)
+      local mon="${event#*>>}"
+      mon="${mon%%,*}"
+      if [[ "$mon" != "eDP-1" ]]; then
+        sleep 0.5
+        hyprctl keyword monitor eDP-1,disabled
+        sleep 0.3
+        apply_wallpaper
+      fi
+      ;;
+    monitorremoved*)
+      local mon="${event#*>>}"
+      if [[ "$mon" != "eDP-1" ]]; then
+        sleep 0.5
+        hyprctl keyword monitor "eDP-1,3456x2160@60,0x0,2"
+        sleep 0.3
+        apply_wallpaper
+      fi
+      ;;
+  esac
+}
+
+socat -U - UNIX-CONNECT:"$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock" | while IFS= read -r line; do
+  handle_event "$line"
+done

@@ -12,6 +12,7 @@ ITEMS=(
   "󰄀  Screenshot (region)"
   "󰕧  Toggle recording"
   "󰅐  Toggle waybar"
+  "󰍹  Toggle internal display"
   "󰌌  Setup kanata"
   "󰁪  Run migrations"
 )
@@ -26,6 +27,20 @@ case "$selected" in
   *"Screenshot"*)           "$ISLAND_PATH/bin/island-capture-screenshot" region ;;
   *"Toggle recording"*)     "$ISLAND_PATH/bin/island-capture-recording" region ;;
   *"Toggle waybar"*)        "$ISLAND_PATH/bin/island-toggle-waybar" ;;
+  *"Toggle internal display"*)
+    mon_count=$(hyprctl monitors -j | python3 -c "import sys,json; print(len(json.load(sys.stdin)))")
+    if hyprctl monitors -j | grep -q '"name": "eDP-1"'; then
+      if (( mon_count > 1 )); then
+        hyprctl eval 'hl.monitor({ output = "eDP-1", disabled = true })'
+        notify-send -u low "Island" "Internal display disabled"
+      else
+        notify-send -u normal "Island" "Cannot disable — no external display connected"
+      fi
+    else
+      hyprctl eval 'hl.monitor({ output = "eDP-1", mode = "3456x2160@60", position = "0x0", scale = "2" })'
+      notify-send -u low "Island" "Internal display enabled"
+    fi
+    ;;
   *"Setup kanata"*)         ghostty --title='Island TUI' -e "$ISLAND_PATH/bin/island-setup-kanata" ;;
   *"Run migrations"*)       ghostty --title='Island TUI' -e "$ISLAND_PATH/bin/island-migrate" ;;
 esac
