@@ -55,7 +55,7 @@ bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
 bindkey '^y' autosuggest-accept
 bindkey '^[w' kill-region
-bindkey -s ^f "tmux-sessionizer\n"
+bindkey -s ^f "island-tmux-sessionizer\n"
 
 # History
 HISTSIZE=5000
